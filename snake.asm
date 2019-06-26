@@ -22,7 +22,7 @@ start:
     call iniciarModoVideo
 	finit
 	call drawSnake
-	call teclado
+main:call teclado
 	call movimiento
 	call fin
 
@@ -32,6 +32,13 @@ iniciarModoVideo:
 	mov ah, 00h
 	mov al, 12h
 	int 10h
+	ret
+
+sleep_half_s:
+	mov cx, 07h
+	mov dx, 0a120h
+	mov ah, 86h
+	int 15h
 	ret
 
 clear_screen:
@@ -70,6 +77,34 @@ sigposition:
 	fstp dword [sigpy1]
 	ret
 
+addOffsetUp:
+	fld dword [py1]
+	fld dword [offset]
+	fsub
+	fstp dword [py1]
+	ret
+
+addOffsetDown:
+	fld dword [py1]
+	fld dword [offset]
+	fadd
+	fstp dword [py1]
+	ret
+
+addOffsetRight:
+	fld dword [px1]
+	fld dword [offset]
+	fadd
+	fstp dword [px1]
+	ret
+
+addOffsetLeft:
+	fld dword [px1]
+	fld dword [offset]
+	fsub
+	fstp dword [px1]
+	ret
+
 pixelBlanco:
 	mov ah, 0Ch
 	mov al, 1111b ;blanco
@@ -95,7 +130,25 @@ movimiento:
 	je fin
 	jmp main
 Up: 
-	ret
+	call addOffsetUp
+	call clear_screen
+	call drawSnake
+	jmp main
+Down:
+	call addOffsetDown
+	call clear_screen
+	call drawSnake
+	jmp main
+Left: 
+	call addOffsetLeft
+	call clear_screen
+	call drawSnake
+	jmp main
+Right:
+	call addOffsetRight
+	call clear_screen
+	call drawSnake
+	jmp main
 
 fin: 
 	int 21h
