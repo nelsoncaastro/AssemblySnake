@@ -7,8 +7,9 @@ sigpy1: resd 1
 
 section .data ;Sección donde inicializamos variables.
 
-px1: dd  20
-py1: dd	 20
+px1: dd  20d
+py1: dd	 20d
+offset: dd 5d
 
 section .text ;Sección del código fuente
 
@@ -17,6 +18,9 @@ global start
 start:
     call iniciarModoVideo
 	finit
+	call drawSnake
+	call espera
+	call fin
 
 ;=======Subrutinas
 
@@ -42,15 +46,22 @@ drawSnake:
 	mov edx, [py1]
 	call sigposition
 sigd:call pixelBlanco
+	inc ecx	
+	cmp ecx, [sigpx1]
+	jne sigd
+	mov ecx, [px1]
+	inc edx
+	cmp edx, [sigpy1]
+	jne sigd
 	ret
 
 sigposition:
 	fld dword [px1]
-	fld dword [5d]
+	fld dword [offset]
 	fadd
 	fstp dword [sigpx1]
 	fld dword [py1]
-	fld dword [5d]
+	fld dword [offset]
 	fadd
 	fstp dword [sigpy1]
 	ret
