@@ -2,14 +2,17 @@ org 100h ;Indica en que dirección de memoria comienza el programa.
 
 section .bss ;Sección donde declaramos variables, solo reservamos memoria.
 
-sigpx1: resd 1
-sigpy1: resd 1
+sigpx1: resd 1 ;Variable para almacenar la siguiente posición de X del jugador
+sigpy1: resd 1 ;Variable para almacenar la siguiente posición de Y del jugador
+
+auxpx1:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
+auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
 
 section .data ;Sección donde inicializamos variables.
 
-px1: dd  20d
-py1: dd	 20d
-offset: dd 5d
+px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
+py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
+offset: dd 10d ;Tamaño del cuadro del culebrón
 
 section .text ;Sección del código fuente
 
@@ -19,7 +22,8 @@ start:
     call iniciarModoVideo
 	finit
 	call drawSnake
-	call espera
+	call teclado
+	call movimiento
 	call fin
 
 ;=======Subrutinas
@@ -73,11 +77,26 @@ pixelBlanco:
 	int 10h
 	ret
 
-espera:
+teclado:
 	mov ah, 00
 	int 16h
 	ret
-	
+
+movimiento:
+	cmp al, 'w'
+	je Up
+	cmp al, 's'
+	je Down
+	cmp al, 'a'
+	je Left
+	cmp al, 'd'
+	je Right
+	cmp al, ' '
+	je fin
+	jmp main
+Up: 
+	ret
+
 fin: 
 	int 21h
 	ret
