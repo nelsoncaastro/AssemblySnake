@@ -2,7 +2,13 @@ org 100h ;Indica en que dirección de memoria comienza el programa.
 
 section .bss ;Sección donde declaramos variables, solo reservamos memoria.
 
+sigpx1: resd 1
+sigpy1: resd 1
+
 section .data ;Sección donde inicializamos variables.
+
+px1: dd  20
+py1: dd	 20
 
 section .text ;Sección del código fuente
 
@@ -10,7 +16,7 @@ global start
 
 start:
     call iniciarModoVideo
-
+	finit
 
 ;=======Subrutinas
 
@@ -32,7 +38,21 @@ clear_screen:
 	ret
 
 drawSnake:
+	mov ecx, [px1]
+	mov edx, [py1]
+	call sigposition
+sigd:call pixelBlanco
+	ret
 
+sigposition:
+	fld dword [px1]
+	fld dword [5d]
+	fadd
+	fstp dword [sigpx1]
+	fld dword [py1]
+	fld dword [5d]
+	fadd
+	fstp dword [sigpy1]
 	ret
 
 pixelBlanco:
