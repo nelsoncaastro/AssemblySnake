@@ -22,9 +22,9 @@
 > FORMAT: BIN
 
 ``` bash 
-nasm -f bin name.asm -o name.com
+nasm -f bin snake.asm -o snake.com
 ```
 
 ``` bash
-dosbox name.com
+sudo dosbox snake.com
 ```
