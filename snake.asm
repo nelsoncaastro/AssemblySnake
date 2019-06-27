@@ -23,12 +23,13 @@ global start
 start:
     call iniciarModoVideo
 	finit
+lupita:
 	call drawLimits
-.next:call drawSnake
-mai:call teclado
+	call drawSnake
+	call teclado
 	call movimiento
-	jmp mai
-;main:call movimientoautomatico
+	call movimientoautomatico
+	jmp lupita
 
 ;=======Subrutinas
 
@@ -142,59 +143,52 @@ movimiento:
 	jmp movsal
 Up: 
 	call UpA
+	mov bx, 1d
 	jmp movsal
 Down: 
 	call DownA
+	mov bx, 2d
 	jmp movsal
 Left: 
 	call LeftA
+	mov bx, 3d
 	jmp movsal
 Right: 
 	call RightA
+	mov bx, 4d
 movsal:ret
 
 movimientoautomatico:
 	call sleep_half_s
-ma1:
-	cmp bx, 1d
-	jne ma2
+cma1:cmp bx, 1d
+	jne cma2
 	call UpA
-	jmp mai
-ma2:
-	cmp bx, 2d
-	jne ma3
+cma2:cmp bx, 2d
+	jne cma3
 	call DownA
-	jmp mai
-ma3:
-	cmp bx, 3d
-	jne ma4
+cma3:cmp bx, 3d
+	jne cma4
 	call LeftA
-	jmp mai
-ma4:
-	cmp bx, 4d
+cma4:cmp bx, 4d
 	jne maret
 	call RightA
-maret:jmp mai
+maret:ret
 
 UpA: ; Orientación 1
 	call addOffsetUp
 	call clear_screen
-	call drawSnake
 	ret
 DownA: ; Orientación 2
 	call addOffsetDown
 	call clear_screen
-	call drawSnake
 	ret
 LeftA: ; Orientación 3
 	call addOffsetLeft
 	call clear_screen
-	call drawSnake
 	ret
 RightA: ; Orientación 4
 	call addOffsetRight
 	call clear_screen
-	call drawSnake
 	ret
 
 drawLimits:
