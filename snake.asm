@@ -260,8 +260,9 @@ sigl3:
 	mov edx, 0d
 sigl4:
 	call pixelBlanco
+	inc edx
+	cmp edx, 408d
 	jne sigl4
-
 	ret
 
 
@@ -288,7 +289,7 @@ checkFruit:
 	fcom st0, st1
 	fstsw ax
 
-	and eax, 0100011100000000B 
+	and eax, 0100011100000000B  ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf1
 	jmp checkret
@@ -300,7 +301,7 @@ cf1:
 	fcom st0, st1
 	fstsw ax
 
-	and eax, 0100011100000000B 
+	and eax, 0100011100000000B ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cf2
 	jmp checkret
@@ -312,7 +313,7 @@ cf2:
 	fcom st0, st1
 	fstsw ax
 
-	and eax, 0100011100000000B 
+	and eax, 0100011100000000B 	 ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf3
 	jmp checkret
@@ -324,7 +325,7 @@ cf3:
 	fcom st0, st1
 	fstsw ax
 
-	and eax, 0100011100000000B 
+	and eax, 0100011100000000B ;operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cfa
 	jmp checkret
