@@ -150,9 +150,12 @@ pixelBlanco:
 	ret
 
 teclado:
-	mov ah, 00
+	mov ah, 01h
 	int 16h
-	ret
+	jnz tecret
+	mov ah, 00h
+	int 16h
+tecret:ret
 
 movimiento:
 	cmp al, 'w'
