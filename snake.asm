@@ -21,6 +21,7 @@ section .text ;Sección del código fuente
 global start
 
 start:
+	call sleep_half_s
     call iniciarModoVideo
 	finit
 	call drawLimits
@@ -156,7 +157,9 @@ teclado:
 	jnz tecret
 	mov ah, 00h
 	int 16h
-tecret:ret
+tecret:
+
+	ret
 
 movimiento:
 	cmp al, 'w'
@@ -171,54 +174,63 @@ movimiento:
 	je fin
 	jmp main
 Up: ; Orientación 1
-	call addOffsetUp
-	call clear_screen
-	;call drawLimits
-	call drawSnake
+	call UpA
 	mov ebx, 1d
 	mov [orientation], ebx
 	jmp main
 Down: ; Orientación 2
-	call addOffsetDown
-	call clear_screen
-	;call drawLimits
-	call drawSnake
+	call DownA
 	mov ebx, 2d
 	mov [orientation], ebx
 	jmp main
 Left: ; Orientación 3
-	call addOffsetLeft
-	call clear_screen
-	;call drawLimits
-	call drawSnake
+	call LeftA
 	mov ebx, 3d
 	mov [orientation], ebx
 	jmp main
 Right: ; Orientación 4
-	call addOffsetRight
-	call clear_screen
-	;call drawLimits
-	call drawSnake
+	call RightA
 	mov ebx, 4d
 	mov [orientation], ebx
 	jmp main
 
 movimientoautomatico:
 	call sleep_half_s
-	mov ebx, 1d
-	cmp [orientation], ebx
-	je Up
-	mov ebx, 2d
-	cmp [orientation], ebx
-	je Down
-	mov ebx, 3d
-	cmp [orientation], ebx
-	je Left
-	mov ebx, 4d
-	cmp [orientation], ebx
-	je Left
+	mov bx, 1d
+	cmp [orientation], bx
+	je UpA
+	mov bx, 2d
+	cmp [orientation], bx
+	je DownA
+	mov bx, 3d
+	cmp [orientation], bx
+	je LeftA
+	mov bx, 4d
+	cmp [orientation], bx
+	je RightA
+	ret
+
+UpA: ; Orientación 1
+	call addOffsetUp
+	call clear_screen
+	call drawSnake
+	ret
+DownA: ; Orientación 2
+	call addOffsetDown
+	call clear_screen
+	call drawSnake
+	ret
+LeftA: ; Orientación 3
+	call addOffsetLeft
+	call clear_screen
+	call drawSnake
+	ret
+RightA: ; Orientación 4
+	call addOffsetRight
+	call clear_screen
+	call drawSnake
 	ret
 
 fin: 
-	int 21h
+	int 20h
 	ret
