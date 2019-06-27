@@ -282,19 +282,55 @@ clret:ret
 
 checkFruit:
 	;mov ebx, [fx1]
-	cmp dword [px1], 100d  ; px1 < fx1
-	jb cf1
+	finit
+	fld dword [fx1] ; stack(st1)
+	fld dword [px1] ; stack(st0)
+	fcom st0, st1
+	fstsw ax
+
+	and eax, 0100011100000000B 
+	cmp eax, 0000000100000000B   ; st0 < st1
+	je cf1
 	jmp checkret
-cf1:cmp dword [sigpx1], 100d ; sigpx1 > fx1
-	ja cf2
+
+cf1:
+	finit
+	fld dword [fx1] ; stack(st1)
+	fld dword [sigpx1] ; stack(st0)
+	fcom st0, st1
+	fstsw ax
+
+	and eax, 0100011100000000B 
+	cmp eax, 0000000000000000B ; st0 > st1
+	je cf2
 	jmp checkret
+
 cf2:
-	;mov ebx, [fy1]
-	cmp dword [py1], 50d ; py1 < fy1
-	jb cf3
+	finit
+	fld dword [fy1] ; stack(st1)
+	fld dword [py1] ; stack(st0)
+	fcom st0, st1
+	fstsw ax
+
+	and eax, 0100011100000000B 
+	cmp eax, 0000000100000000B   ; st0 < st1
+	je cf3
 	jmp checkret
-cf3:cmp dword [sigpy1], 50d ; sigpy1 > fy1
-	ja cfa
+
+cf3:
+	finit
+	fld dword [fy1] ; stack(st1)
+	fld dword [sigpy1]  ; stack(st0)
+	fcom st0, st1
+	fstsw ax
+
+	and eax, 0100011100000000B 
+	cmp eax, 0000000000000000B ; st0 > st1
+	je cfa
 	jmp checkret
+
 cfa:call fin
 checkret:ret
+
+eatFruit:
+	ret
