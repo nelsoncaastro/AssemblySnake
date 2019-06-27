@@ -24,11 +24,17 @@ start:
     call iniciarModoVideo
 	finit
 	call drawLimits
-	call drawSnake
-main:call teclado
+.next:call drawSnake
+mai:call teclado
 	call movimiento
+	jmp mai
+;main:call movimientoautomatico
 
 ;=======Subrutinas
+
+fin: 
+	int 20h
+	ret
 
 iniciarModoVideo:
 	mov ah, 00h
@@ -52,42 +58,6 @@ clear_screen:
 	mov dl, 4fh ; Columna final 
 	mov dh, 1dh ; Fila final
 	int 10h
-	ret
-
-drawLimits:
-
-	mov ecx, 0d
-	mov edx, 0d
-sigl1:
-	call pixelBlanco
-	inc ecx
-	cmp ecx, 639d
-	jne sigl1
-
-	mov ecx, 0d
-	mov edx, 408d
-sigl2:
-	call pixelBlanco
-	inc ecx
-	cmp ecx, 639d
-	jne sigl2
-
-	mov ecx, 0d
-	mov edx, 0d
-sigl3:
-	call pixelBlanco
-	inc edx
-	cmp edx, 408d
-	jne sigl3
-
-	mov ecx, 639d
-	mov edx, 0d
-sigl4:
-	call pixelBlanco
-	inc edx
-	cmp edx, 408d
-	jne sigl4
-
 	ret
 
 drawSnake:
@@ -153,32 +123,10 @@ pixelBlanco:
 teclado:
 	mov ah, 01h
 	int 16h
-	jnz tecret
+	jz tecret
 	mov ah, 00h
 	int 16h
-tecret:
-	;call movimientoautomatico
-	ret
-
-movimientoautomatico:
-	call sleep_half_s
-ma1:
-	cmp bx, 1d
-	jne ma2
-	call UpA
-ma2:
-	cmp bx, 2d
-	jne ma3
-	call DownA
-ma3:
-	cmp bx, 3d
-	jne ma4
-	call LeftA
-ma4:
-	cmp bx, 4d
-	jne maret
-	call RightA
-maret:ret
+tecret: ret
 
 movimiento:
 	cmp al, 'w'
@@ -191,23 +139,42 @@ movimiento:
 	je Right
 	cmp al, ' '
 	je fin
-	jmp main
-Up: ; Orientación 1
+	jmp movsal
+Up: 
 	call UpA
-	mov bx, 1d
-	jmp main
-Down: ; Orientación 2
+	jmp movsal
+Down: 
 	call DownA
-	mov bx, 2d
-	jmp main
-Left: ; Orientación 3
+	jmp movsal
+Left: 
 	call LeftA
-	mov bx, 3d
-	jmp main
-Right: ; Orientación 4
+	jmp movsal
+Right: 
 	call RightA
-	mov bx, 4d
-	jmp main
+movsal:ret
+
+movimientoautomatico:
+	call sleep_half_s
+ma1:
+	cmp bx, 1d
+	jne ma2
+	call UpA
+	jmp mai
+ma2:
+	cmp bx, 2d
+	jne ma3
+	call DownA
+	jmp mai
+ma3:
+	cmp bx, 3d
+	jne ma4
+	call LeftA
+	jmp mai
+ma4:
+	cmp bx, 4d
+	jne maret
+	call RightA
+maret:jmp mai
 
 UpA: ; Orientación 1
 	call addOffsetUp
@@ -230,6 +197,37 @@ RightA: ; Orientación 4
 	call drawSnake
 	ret
 
-fin: 
-	int 20h
+drawLimits:
+	mov ecx, 0d
+	mov edx, 0d
+sigl1:
+	call pixelBlanco
+	inc ecx
+	cmp ecx, 639d
+	jne sigl1
+
+	mov ecx, 0d
+	mov edx, 408d
+sigl2:
+	call pixelBlanco
+	inc ecx
+	cmp ecx, 639d
+	jne sigl2
+
+	mov ecx, 0d
+	mov edx, 0d
+sigl3:
+	call pixelBlanco
+	inc edx
+	cmp edx, 408d
+	jne sigl3
+
+	mov ecx, 639d
+	mov edx, 0d
+sigl4:
+	call pixelBlanco
+	inc edx
+	cmp edx, 408d
+	jne sigl4
+
 	ret
