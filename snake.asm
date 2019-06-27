@@ -8,6 +8,8 @@ sigpy1: resd 1 ;Variable para almacenar la siguiente posición de Y del jugador
 auxpx1:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
 auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
 
+orientation: resd 1
+
 section .data ;Sección donde inicializamos variables.
 
 px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
@@ -25,7 +27,6 @@ start:
 	call drawSnake
 main:call teclado
 	call movimiento
-	call fin
 
 ;=======Subrutinas
 
@@ -169,30 +170,54 @@ movimiento:
 	cmp al, ' '
 	je fin
 	jmp main
-Up: 
+Up: ; Orientación 1
 	call addOffsetUp
 	call clear_screen
 	;call drawLimits
 	call drawSnake
+	mov ebx, 1d
+	mov [orientation], ebx
 	jmp main
-Down:
+Down: ; Orientación 2
 	call addOffsetDown
 	call clear_screen
 	;call drawLimits
 	call drawSnake
+	mov ebx, 2d
+	mov [orientation], ebx
 	jmp main
-Left: 
+Left: ; Orientación 3
 	call addOffsetLeft
 	call clear_screen
 	;call drawLimits
 	call drawSnake
+	mov ebx, 3d
+	mov [orientation], ebx
 	jmp main
-Right:
+Right: ; Orientación 4
 	call addOffsetRight
 	call clear_screen
 	;call drawLimits
 	call drawSnake
+	mov ebx, 4d
+	mov [orientation], ebx
 	jmp main
+
+movimientoautomatico:
+	call sleep_half_s
+	mov ebx, 1d
+	cmp [orientation], ebx
+	je Up
+	mov ebx, 2d
+	cmp [orientation], ebx
+	je Down
+	mov ebx, 3d
+	cmp [orientation], ebx
+	je Left
+	mov ebx, 4d
+	cmp [orientation], ebx
+	je Left
+	ret
 
 fin: 
 	int 21h
