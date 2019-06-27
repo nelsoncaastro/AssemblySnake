@@ -8,13 +8,18 @@ sigpy1: resd 1 ;Variable para almacenar la siguiente posición de Y del jugador
 auxpx1:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
 auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
 
-orientation: resd 1
+sigfx1: resd 1
+sigfy1: resd 1
 
 section .data ;Sección donde inicializamos variables.
 
 px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
 py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
 offset: dd 10d ;Tamaño del cuadro del culebrón
+
+fx1: dd 100d
+fy1: dd 50d
+foffset: dd 5d
 
 section .text ;Sección del código fuente
 
@@ -25,6 +30,7 @@ start:
 	finit
 lupita:
 	call drawLimits
+	call drawFruit
 	call drawSnake
 	call teclado
 	call movimiento
@@ -76,6 +82,31 @@ sigd:call pixelBlanco
 	jne sigd
 	ret
 
+drawFruit:
+	mov ecx, [fx1]
+	mov edx, [fy1]
+	call fsigposition
+fsigd:call pixelVerde
+	inc ecx
+	cmp ecx, [sigfx1]
+	jne fsigd
+	mov ecx, [fx1]
+	inc edx
+	cmp edx, [sigfy1]
+	jne fsigd
+	ret
+
+fsigposition:
+	fld dword [fx1]
+	fld dword [foffset]
+	fadd
+	fstp dword [sigfx1]
+	fld dword [fy1]
+	fld dword [foffset]
+	fadd
+	fstp dword [sigfy1]
+	ret
+
 sigposition:
 	fld dword [px1]
 	fld dword [offset]
@@ -118,6 +149,13 @@ addOffsetLeft:
 pixelBlanco:
 	mov ah, 0Ch
 	mov al, 1111b ;blanco
+	mov bh, 00h
+	int 10h
+	ret
+
+pixelVerde:
+	mov ah, 0Ch
+	mov al, 1010b ;verde
 	mov bh, 00h
 	int 10h
 	ret
@@ -227,6 +265,7 @@ sigl4:
 
 	ret
 
+
 checkLimits:
 	cmp dword [px1], 0d
 	jne ccl2
@@ -241,3 +280,21 @@ ccl4:cmp dword [py1], 408d
 	jne clret
 	call fin
 clret:ret
+
+checkFruit:
+	mov ebx, [fx1]
+	cmp [px1], ebx  ; px1 < fx1
+	jb cf1
+	jmp checkret
+cf1:cmp [sigpx1], ebx ; sigpx1 > fx1
+	ja cf2
+	jmp checkret
+cf2:mov ebx, [fy1]
+	cmp [py1], ebx ; py1 < fy1
+	jb cf3
+	jmp checkret
+cf3:cmp [sigpy1], ebx ; sigpy1 > fy1
+	ja cfa
+	jmp checkret
+cfa:call fin
+checkret:ret
