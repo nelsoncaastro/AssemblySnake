@@ -29,6 +29,7 @@ lupita:
 	call teclado
 	call movimiento
 	call movimientoautomatico
+	call checkLimits
 	jmp lupita
 
 ;=======Subrutinas
@@ -225,3 +226,18 @@ sigl4:
 	jne sigl4
 
 	ret
+
+checkLimits:
+	cmp dword [px1], 0d
+	jne ccl2
+	call fin
+ccl2:cmp dword [px1], 639d
+	jne ccl3
+	call fin
+ccl3:cmp dword [py1], 0d
+	jne ccl4
+	call fin
+ccl4:cmp dword [py1], 408d
+	jne clret
+	call fin
+clret:ret
