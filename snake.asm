@@ -21,6 +21,7 @@ global start
 start:
     call iniciarModoVideo
 	finit
+	call drawLimits
 	call drawSnake
 main:call teclado
 	call movimiento
@@ -50,6 +51,42 @@ clear_screen:
 	mov dl, 4fh ; Columna final 
 	mov dh, 1dh ; Fila final
 	int 10h
+	ret
+
+drawLimits:
+
+	mov ecx, 0d
+	mov edx, 0d
+sigl1:
+	call pixelBlanco
+	inc ecx
+	cmp ecx, 639d
+	jne sigl1
+
+	mov ecx, 0d
+	mov edx, 408d
+sigl2:
+	call pixelBlanco
+	inc ecx
+	cmp ecx, 639d
+	jne sigl2
+
+	mov ecx, 0d
+	mov edx, 0d
+sigl3:
+	call pixelBlanco
+	inc edx
+	cmp edx, 408d
+	jne sigl3
+
+	mov ecx, 639d
+	mov edx, 0d
+sigl4:
+	call pixelBlanco
+	inc edx
+	cmp edx, 408d
+	jne sigl4
+
 	ret
 
 drawSnake:
@@ -132,21 +169,25 @@ movimiento:
 Up: 
 	call addOffsetUp
 	call clear_screen
+	;call drawLimits
 	call drawSnake
 	jmp main
 Down:
 	call addOffsetDown
 	call clear_screen
+	;call drawLimits
 	call drawSnake
 	jmp main
 Left: 
 	call addOffsetLeft
 	call clear_screen
+	;call drawLimits
 	call drawSnake
 	jmp main
 Right:
 	call addOffsetRight
 	call clear_screen
+	;call drawLimits
 	call drawSnake
 	jmp main
 
