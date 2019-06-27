@@ -270,14 +270,14 @@ checkLimits:
 	cmp dword [px1], 0d
 	jne ccl2
 	call fin
-ccl2:cmp dword [px1], 639d
+ccl2:cmp dword [px1], 640d
 	jne ccl3
 	call fin
-ccl3:cmp dword [py1], 0d
-	jne ccl4
+ccl3:cmp dword [py1], 10d
+	jnb ccl4
 	call fin
-ccl4:cmp dword [py1], 408d
-	jne clret
+ccl4:cmp dword [sigpy1], 410d
+	jna clret
 	call fin
 clret:ret
 
