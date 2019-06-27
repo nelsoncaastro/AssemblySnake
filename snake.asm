@@ -36,6 +36,7 @@ lupita:
 	call movimiento
 	call movimientoautomatico
 	call checkLimits
+	call checkFruit
 	jmp lupita
 
 ;=======Subrutinas
@@ -259,8 +260,6 @@ sigl3:
 	mov edx, 0d
 sigl4:
 	call pixelBlanco
-	inc edx
-	cmp edx, 408d
 	jne sigl4
 
 	ret
@@ -282,18 +281,19 @@ ccl4:cmp dword [py1], 408d
 clret:ret
 
 checkFruit:
-	mov ebx, [fx1]
-	cmp [px1], ebx  ; px1 < fx1
+	;mov ebx, [fx1]
+	cmp dword [px1], 100d  ; px1 < fx1
 	jb cf1
 	jmp checkret
-cf1:cmp [sigpx1], ebx ; sigpx1 > fx1
+cf1:cmp dword [sigpx1], 100d ; sigpx1 > fx1
 	ja cf2
 	jmp checkret
-cf2:mov ebx, [fy1]
-	cmp [py1], ebx ; py1 < fy1
+cf2:
+	;mov ebx, [fy1]
+	cmp dword [py1], 50d ; py1 < fy1
 	jb cf3
 	jmp checkret
-cf3:cmp [sigpy1], ebx ; sigpy1 > fy1
+cf3:cmp dword [sigpy1], 50d ; sigpy1 > fy1
 	ja cfa
 	jmp checkret
 cfa:call fin
