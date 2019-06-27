@@ -21,7 +21,6 @@ section .text ;Sección del código fuente
 global start
 
 start:
-	call sleep_half_s
     call iniciarModoVideo
 	finit
 	call drawLimits
@@ -158,8 +157,28 @@ teclado:
 	mov ah, 00h
 	int 16h
 tecret:
-
+	;call movimientoautomatico
 	ret
+
+movimientoautomatico:
+	call sleep_half_s
+ma1:
+	cmp bx, 1d
+	jne ma2
+	call UpA
+ma2:
+	cmp bx, 2d
+	jne ma3
+	call DownA
+ma3:
+	cmp bx, 3d
+	jne ma4
+	call LeftA
+ma4:
+	cmp bx, 4d
+	jne maret
+	call RightA
+maret:ret
 
 movimiento:
 	cmp al, 'w'
@@ -175,40 +194,20 @@ movimiento:
 	jmp main
 Up: ; Orientación 1
 	call UpA
-	mov ebx, 1d
-	mov [orientation], ebx
+	mov bx, 1d
 	jmp main
 Down: ; Orientación 2
 	call DownA
-	mov ebx, 2d
-	mov [orientation], ebx
+	mov bx, 2d
 	jmp main
 Left: ; Orientación 3
 	call LeftA
-	mov ebx, 3d
-	mov [orientation], ebx
+	mov bx, 3d
 	jmp main
 Right: ; Orientación 4
 	call RightA
-	mov ebx, 4d
-	mov [orientation], ebx
-	jmp main
-
-movimientoautomatico:
-	call sleep_half_s
-	mov bx, 1d
-	cmp [orientation], bx
-	je UpA
-	mov bx, 2d
-	cmp [orientation], bx
-	je DownA
-	mov bx, 3d
-	cmp [orientation], bx
-	je LeftA
 	mov bx, 4d
-	cmp [orientation], bx
-	je RightA
-	ret
+	jmp main
 
 UpA: ; Orientación 1
 	call addOffsetUp
