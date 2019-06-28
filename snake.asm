@@ -17,6 +17,7 @@ offset: dd 20d ;Tamaño del cuadro del culebrón
 pheadori: db 0 
 
 snakesize: db 1
+actualpos: db 1
 
 fx1: dd 100d
 fy1: dd 50d
@@ -237,18 +238,155 @@ movsal:ret
 
 movimientoautomatico:
 	call sleep_half_s
-cma1:cmp byte [pheadori], 1d
-	jne cma2
+	cmp byte [pheadori], 1
+	jne cma1
 	call UpA
-cma2:cmp byte [pheadori], 2d
-	jne cma3
+cma1:cmp byte [pheadori], 2
+	jne cma2
 	call DownA
-cma3:cmp byte [pheadori], 3d
-	jne cma4
+cma2:cmp byte [pheadori], 3
+	jne cma3
 	call LeftA
-cma4:cmp byte [pheadori], 4d
-	jne maret
+cma3:cmp byte [pheadori], 4
+	jne cma4
 	call RightA
+cma4:cmp byte [snakesize], 1
+	je maret
+
+	cmp byte [p2ori], 1
+	jne cma5
+	call UpA
+cma5:cmp byte [p2ori], 2
+	jne cma6
+	call DownA
+cma6:cmp byte [p2ori], 3
+	jne cma7
+	call LeftA
+cma7:cmp byte [p2ori], 4
+	jne cma8
+	call RightA
+cma8:cmp byte [snakesize], 2
+	je maret
+
+	cmp byte [p3ori], 1
+	jne cma9
+	call UpA
+cma9:cmp byte [p3ori], 2
+	jne cma10
+	call DownA
+cma10:cmp byte [p3ori], 3
+	jne cma11
+	call LeftA
+cma11:cmp byte [p3ori], 4
+	jne cma12
+	call RightA
+cma12:cmp byte [snakesize], 3
+	je maret
+
+	cmp byte [p4ori], 1
+	jne cma13
+	call UpA
+cma13:cmp byte [p4ori], 2
+	jne cma14
+	call DownA
+cma14:cmp byte [p4ori], 3
+	jne cma15
+	call LeftA
+cma15:cmp byte [p4ori], 4
+	jne cma16
+	call RightA
+cma16:cmp byte [snakesize], 4
+	je maret
+
+	cmp byte [p5ori], 1
+	jne cma17
+	call UpA
+cma17:cmp byte [p5ori], 2
+	jne cma18
+	call DownA
+cma18:cmp byte [p5ori], 3
+	jne cma19
+	call LeftA
+cma19:cmp byte [p5ori], 4
+	jne cma20
+	call RightA
+cma20:cmp byte [snakesize], 5
+	je maret
+
+	cmp byte [p6ori], 1
+	jne cma21
+	call UpA
+cma21:cmp byte [p6ori], 2
+	jne cma22
+	call DownA
+cma22:cmp byte [p6ori], 3
+	jne cma23
+	call LeftA
+cma23:cmp byte [p6ori], 4
+	jne cma24
+	call RightA
+cma24:cmp byte [snakesize], 6
+	je maret
+
+	cmp byte [p7ori], 1
+	jne cma25
+	call UpA
+cma25:cmp byte [p7ori], 2
+	jne cma26
+	call DownA
+cma26:cmp byte [p7ori], 3
+	jne cma27
+	call LeftA
+cma27:cmp byte [p7ori], 4
+	jne cma28
+	call RightA
+cma28:cmp byte [snakesize], 7
+	je maret
+
+	cmp byte [p8ori], 1
+	jne cma29
+	call UpA
+cma29:cmp byte [p8ori], 2
+	jne cma30
+	call DownA
+cma30:cmp byte [p8ori], 3
+	jne cma31
+	call LeftA
+cma31:cmp byte [p8ori], 4
+	jne cma32
+	call RightA
+cma32:cmp byte [snakesize], 8
+	je maret
+
+	cmp byte [p9ori], 1
+	jne cma33
+	call UpA
+cma33:cmp byte [p9ori], 2
+	jne cma34
+	call DownA
+cma34:cmp byte [p9ori], 3
+	jne cma35
+	call LeftA
+cma35:cmp byte [p9ori], 4
+	jne cma36
+	call RightA
+cma36:cmp byte [snakesize], 9
+	je maret
+
+	cmp byte [p10ori], 1
+	jne cma37
+	call UpA
+cma37:cmp byte [p10ori], 2
+	jne cma38
+	call DownA
+cma38:cmp byte [p10ori], 3
+	jne cma39
+	call LeftA
+cma39:cmp byte [p10ori], 4
+	jne cma40
+	call RightA
+cma40:cmp byte [snakesize], 10
+	je maret
 maret:ret
 
 UpA: ; Orientación 1
@@ -268,7 +406,7 @@ RightA: ; Orientación 4
 	call clear_screen
 	ret
 
-drawLimits:
+drawLimits: ;Función para dibujar los limites
 	mov ecx, 0d
 	mov edx, 0d
 sigl1:
@@ -276,7 +414,6 @@ sigl1:
 	inc ecx
 	cmp ecx, 639d
 	jne sigl1
-
 	mov ecx, 0d
 	mov edx, 408d
 sigl2:
@@ -284,7 +421,6 @@ sigl2:
 	inc ecx
 	cmp ecx, 639d
 	jne sigl2
-
 	mov ecx, 0d
 	mov edx, 0d
 sigl3:
@@ -292,7 +428,6 @@ sigl3:
 	inc edx
 	cmp edx, 408d
 	jne sigl3
-
 	mov ecx, 639d
 	mov edx, 0d
 sigl4:
@@ -302,8 +437,7 @@ sigl4:
 	jne sigl4
 	ret
 
-
-checkLimits:
+checkLimits: ;Solo es necesario revisar si la cabeza topó con uno de los limites
 	cmp dword [px1], 0d
 	jne ccl2
 	call fin
@@ -318,49 +452,42 @@ ccl4:cmp dword [sigpy1], 410d
 	call fin
 clret:ret
 
-checkFruit:
+checkFruit: ;Solo es necesario revisar si la cabeza se comió una fruta
 	finit
 	fld dword [fx1] ; stack(st1)
 	fld dword [px1] ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B  ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf1
 	jmp checkret
-
 cf1:
 	finit
 	fld dword [fx1] ; stack(st1)
 	fld dword [sigpx1] ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cf2
 	jmp checkret
-
 cf2:
 	finit
 	fld dword [fy1] ; stack(st1)
 	fld dword [py1] ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B 	 ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf3
 	jmp checkret
-
 cf3:
 	finit
 	fld dword [fy1] ; stack(st1)
 	fld dword [sigpy1]  ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B ;operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cfa
