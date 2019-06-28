@@ -9,53 +9,54 @@ auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del 
 sigfx1: resd 1
 sigfy1: resd 1
 
-pheadori: resb 1 
-
-px2: resd 1
-py2: resd 1
-p2ori: resb 1
-
-px3: resd 1
-py3: resd 1
-p3ori: resb 1
-
-px4: resd 1
-py4: resd 1
-p4ori: resb 1
-
-px5: resd 1
-py5: resd 1
-p5ori: resb 1
-
-px6: resd 1
-py6: resd 1
-p6ori: resb 1
-
-px7: resd 1
-py7: resd 1
-p7ori: resb 1
-
-px8: resd 1
-py8: resd 1
-p8ori: resb 1
-
-px9: resd 1
-py9: resd 1
-p9ori: resb 1
-
-px10: resd 1
-py10: resd 1
-p10ori: resb 1
-
 section .data ;Sección donde inicializamos variables.
 
 px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
 py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
 offset: dd 20d ;Tamaño del cuadro del culebrón
+pheadori: db 0 
+
+snakesize: db 1
 
 fx1: dd 100d
 fy1: dd 50d
 foffset: dd 15d
+
+px2: dd 0
+py2: dd 0
+p2ori: db 0
+
+px3: dd 0
+py3: dd 0
+p3ori: db 0
+
+px4: dd 0
+py4: dd 0
+p4ori: db 0
+
+px5: dd 0
+py5: dd 0
+p5ori: db 0
+
+px6: dd 0
+py6: dd 0
+p6ori: db 0
+
+px7: dd 0
+py7: dd 0
+p7ori: db 0
+
+px8: dd 0
+py8: dd 0
+p8ori: db 0
+
+px9: resd 0
+py9: resd 0
+p9ori: db 0
+
+px10: resd 0
+py10: resd 0
+p10ori: db 0
 
 section .text ;Sección del código fuente
 
