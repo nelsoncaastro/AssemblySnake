@@ -13,9 +13,8 @@ sigfy1: resd 1
 
 section .data ;Sección donde inicializamos variables.
 
-%define snakex(i) byte [es:i]
-%define snakey(i) byte [es:i+500]
-%define snaked(i) byte [es:i+1000]
+%define snakex(i) dword [es:i]
+%define snakey(i) dword [es:i+500]
 
 px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
 py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
@@ -32,6 +31,7 @@ global start
 start:
     call iniciarModoVideo
 	finit
+	call initSnake
 lupita:
 	call drawLimits
 	call drawFruit
@@ -39,8 +39,8 @@ lupita:
 	call teclado
 	call movimiento
 	call movimientoautomatico
-	call checkLimits
-	call checkFruit
+	;call checkLimits
+	;call checkFruit
 	jmp lupita
 
 ;=======Subrutinas
@@ -73,15 +73,23 @@ clear_screen:
 	int 10h
 	ret
 
+initSnake:
+	finit
+	fld dword [px1]
+	fstp snakex(0)
+	fld dword [py1]
+	fstp snakey(0)
+	ret
+
 drawSnake:
-	mov ecx, [px1]
-	mov edx, [py1]
+	mov ecx, snakex(0)
+	mov edx, snakey(0)
 	call sigposition
 sigd:call pixelBlanco
 	inc ecx	
 	cmp ecx, [sigpx1]
 	jne sigd
-	mov ecx, [px1]
+	mov ecx, snakex(0)
 	inc edx
 	cmp edx, [sigpy1]
 	jne sigd
@@ -113,42 +121,43 @@ fsigposition:
 	ret
 
 sigposition:
-	fld dword [px1]
+	fld snakex(0)
 	fld dword [offset]
 	fadd
 	fstp dword [sigpx1]
-	fld dword [py1]
+
+	fld snakey(0)
 	fld dword [offset]
 	fadd
 	fstp dword [sigpy1]
 	ret
 
 addOffsetUp:
-	fld dword [py1]
+	fld snakey(0)
 	fld dword [offset]
 	fsub
-	fstp dword [py1]
+	fstp snakey(0)
 	ret
 
 addOffsetDown:
-	fld dword [py1]
+	fld snakey(0)
 	fld dword [offset]
 	fadd
-	fstp dword [py1]
+	fstp snakey(0)
 	ret
 
 addOffsetRight:
-	fld dword [px1]
+	fld snakex(0)
 	fld dword [offset]
 	fadd
-	fstp dword [px1]
+	fstp snakex(0)
 	ret
 
 addOffsetLeft:
-	fld dword [px1]
+	fld snakex(0)
 	fld dword [offset]
 	fsub
-	fstp dword [px1]
+	fstp snakex(0)
 	ret
 
 pixelBlanco:
@@ -269,7 +278,6 @@ sigl4:
 	jne sigl4
 	ret
 
-
 checkLimits:
 	cmp dword [px1], 0d
 	jne ccl2
@@ -297,38 +305,32 @@ checkFruit:
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf1
 	jmp checkret
-
 cf1:
 	finit
 	fld dword [fx1] ; stack(st1)
 	fld dword [sigpx1] ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cf2
 	jmp checkret
-
 cf2:
 	finit
 	fld dword [fy1] ; stack(st1)
 	fld dword [py1] ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B 	 ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf3
 	jmp checkret
-
 cf3:
 	finit
 	fld dword [fy1] ; stack(st1)
 	fld dword [sigpy1]  ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B ;operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cfa
