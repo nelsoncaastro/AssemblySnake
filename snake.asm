@@ -68,6 +68,7 @@ global start
 start:
     call iniciarModoVideo
 	finit
+	call eatFruit
 lupita:
 	call drawLimits
 	call drawFruit
@@ -682,7 +683,11 @@ drawyourbody:
 	call drawSnake2
 	cmp byte [snakesize], 2d
 	je dybret
+	call drawSnake3
+	cmp byte [snakesize], 3d
+	je dybret
 dybret:ret
+
 moveyourbody:
 	call sleep_half_s
 	call movimientoautomatico
@@ -722,7 +727,7 @@ cma23:cmp byte [p2ori], 3d
 	call LeftA2
 cma24:cmp byte [p2ori], 4d
 	jne maret2
-	call RightA
+	call RightA2
 maret2:ret
 
 movimientoautomatico3:
@@ -737,7 +742,7 @@ cma33:cmp byte [p3ori], 3d
 	call LeftA3
 cma34:cmp byte [p3ori], 4d
 	jne maret3
-	call RightA
+	call RightA3
 maret3:ret
 
 movimientoautomatico4:
@@ -752,7 +757,7 @@ cma43:cmp byte [p4ori], 3d
 	call LeftA4
 cma44:cmp byte [p4ori], 4d
 	jne maret4
-	call RightA
+	call RightA4
 maret4:ret
 
 movimientoautomatico5:
@@ -767,7 +772,7 @@ cma53:cmp byte [p5ori], 3d
 	call LeftA5
 cma54:cmp byte [p5ori], 4d
 	jne maret5
-	call RightA
+	call RightA5
 maret5:ret
 
 movimientoautomatico6:
@@ -782,7 +787,7 @@ cma63:cmp byte [p6ori], 3d
 	call LeftA6
 cma64:cmp byte [p6ori], 4d
 	jne maret6
-	call RightA
+	call RightA6
 maret6:ret
 
 movimientoautomatico7:
@@ -797,7 +802,7 @@ cma73:cmp byte [p7ori], 3d
 	call LeftA7
 cma74:cmp byte [p7ori], 4d
 	jne maret7
-	call RightA
+	call RightA7
 maret7:ret
 
 movimientoautomatico8:
@@ -812,7 +817,7 @@ cma83:cmp byte [p8ori], 3d
 	call LeftA8
 cma84:cmp byte [p8ori], 4d
 	jne maret8
-	call RightA
+	call RightA8
 maret8:ret
 
 movimientoautomatico9:
@@ -827,7 +832,7 @@ cma93:cmp byte [p9ori], 3d
 	call LeftA9
 cma94:cmp byte [p9ori], 4d
 	jne maret9
-	call RightA
+	call RightA9
 maret9:ret
 
 movimientoautomatico10:
@@ -842,7 +847,7 @@ cma103:cmp byte [p10ori], 3d
 	call LeftA10
 cma104:cmp byte [p10ori], 4d
 	jne maret10
-	call RightA
+	call RightA10
 maret10:ret
 
 UpA: ; Orientación 1
@@ -1119,4 +1124,11 @@ checkret:ret
 eatFruit:
 	inc byte [snakesize]
 	mov si, [pheadori]
+	mov [p2ori],si
+	mov si, [px1]
+	sub si, [offset]
+	mov [px2], si
+	mov si, [py1]
+	sub si, [offset]
+	mov [py2], si
 	ret
