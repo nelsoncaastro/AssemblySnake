@@ -4,8 +4,8 @@ section .bss ;Sección donde declaramos variables, solo reservamos memoria.
 
 sigpx1: resd 1 ;Variable para almacenar la siguiente posición de X del jugador
 sigpy1: resd 1 ;Variable para almacenar la siguiente posición de Y del jugador
-auxpx1:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
-auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
+;auxpx:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
+;auxpy: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
 sigfx1: resd 1
 sigfy1: resd 1
 
@@ -15,6 +15,9 @@ px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
 py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
 offset: dd 20d ;Tamaño del cuadro del culebrón
 pheadori: db 0 
+
+auxpx: dd 0
+auxpy: dd 0
 
 snakesize: db 1
 
@@ -68,7 +71,7 @@ start:
 lupita:
 	call drawLimits
 	call drawFruit
-	call drawSnake
+	call drawyourbody
 	call teclado
 	call movimiento
 	call moveyourbody
@@ -119,6 +122,232 @@ sigd:call pixelBlanco
 	cmp edx, [sigpy1]
 	jne sigd
 	ret
+sigposition:
+	fld dword [px1]
+	fld dword [offset]
+	fadd
+	fstp dword [sigpx1]
+	fld dword [py1]
+	fld dword [offset]
+	fadd
+	fstp dword [sigpy1]
+	ret
+
+drawSnake2:
+	mov ecx, [px2]
+	mov edx, [py2]
+	call sigposition2
+sigd2:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd2
+	mov ecx, [px2]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd2
+	ret
+sigposition2:
+	fld dword [px2]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py2]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake3:
+	mov ecx, [px3]
+	mov edx, [py3]
+	call sigposition3
+sigd3:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd3
+	mov ecx, [px3]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd3
+	ret
+sigposition3:
+	fld dword [px3]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py3]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake4:
+	mov ecx, [px4]
+	mov edx, [py4]
+	call sigposition4
+sigd4:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd4
+	mov ecx, [px4]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd4
+	ret
+sigposition4:
+	fld dword [px4]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py4]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake5:
+	mov ecx, [px5]
+	mov edx, [py5]
+	call sigposition5
+sigd5:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd5
+	mov ecx, [px5]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd5
+	ret
+sigposition5:
+	fld dword [px5]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py5]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake6:
+	mov ecx, [px6]
+	mov edx, [py6]
+	call sigposition6
+sigd6:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd6
+	mov ecx, [px6]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd6
+	ret
+sigposition6:
+	fld dword [px6]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py6]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake7:
+	mov ecx, [px7]
+	mov edx, [py7]
+	call sigposition7
+sigd7:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd7
+	mov ecx, [px7]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd7
+	ret
+sigposition7:
+	fld dword [px7]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py7]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake8:
+	mov ecx, [px8]
+	mov edx, [py8]
+	call sigposition8
+sigd8:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd8
+	mov ecx, [px8]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd8
+	ret
+sigposition8:
+	fld dword [px8]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py8]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake9:
+	mov ecx, [px9]
+	mov edx, [py9]
+	call sigposition9
+sigd9:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd9
+	mov ecx, [px9]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd9
+	ret
+sigposition9:
+	fld dword [px9]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py9]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
+
+drawSnake10:
+	mov ecx, [px10]
+	mov edx, [py10]
+	call sigposition10
+sigd10:call pixelBlanco
+	inc ecx	
+	cmp ecx, [auxpx]
+	jne sigd10
+	mov ecx, [px10]
+	inc edx
+	cmp edx, [auxpy]
+	jne sigd10
+	ret
+sigposition10:
+	fld dword [px10]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpx]
+	fld dword [py10]
+	fld dword [offset]
+	fadd
+	fstp dword [auxpy]
+	ret
 
 drawFruit:
 	mov ecx, [fx1]
@@ -143,17 +372,6 @@ fsigposition:
 	fld dword [foffset]
 	fadd
 	fstp dword [sigfy1]
-	ret
-
-sigposition:
-	fld dword [px1]
-	fld dword [offset]
-	fadd
-	fstp dword [sigpx1]
-	fld dword [py1]
-	fld dword [offset]
-	fadd
-	fstp dword [sigpy1]
 	ret
 
 addOffsetUp:
@@ -197,13 +415,13 @@ addOffsetRight2:
 	fld dword [px2]
 	fld dword [offset]
 	fadd
-	fstp dword [px1]
+	fstp dword [px2]
 	ret
 addOffsetLeft2:
 	fld dword [px2]
 	fld dword [offset]
 	fsub
-	fstp dword [px1]
+	fstp dword [px2]
 	ret
 
 addOffsetUp3:
@@ -457,10 +675,25 @@ Right:
 	mov byte [pheadori], 4
 movsal:ret
 
+drawyourbody:
+	call drawSnake
+	cmp byte [snakesize], 1d
+	je dybret
+	call drawSnake2
+	cmp byte [snakesize], 2d
+	je dybret
+dybret:ret
 moveyourbody:
 	call sleep_half_s
 	call movimientoautomatico
-	ret
+	cmp byte [snakesize], 1d
+	je mybret
+	call movimientoautomatico2
+	mov si, [pheadori]
+	mov [p2ori], si	
+	cmp byte [snakesize], 2d
+	je mybret
+mybret:ret
 
 movimientoautomatico:
 	cmp byte [pheadori], 1d
