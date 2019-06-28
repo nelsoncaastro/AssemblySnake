@@ -490,6 +490,159 @@ RightA: ; Orientación 4
 	call clear_screen
 	ret
 
+UpA2: ; Orientación 1
+	call addOffsetUp2
+	call clear_screen
+	ret
+DownA2: ; Orientación 2
+	call addOffsetDown2
+	call clear_screen
+	ret
+LeftA2: ; Orientación 3
+	call addOffsetLeft2
+	call clear_screen
+	ret
+RightA2: ; Orientación 4
+	call addOffsetRight2
+	call clear_screen
+	ret
+
+UpA3: ; Orientación 1
+	call addOffsetUp3
+	call clear_screen
+	ret
+DownA3: ; Orientación 2
+	call addOffsetDown3
+	call clear_screen
+	ret
+LeftA3: ; Orientación 3
+	call addOffsetLeft3
+	call clear_screen
+	ret
+RightA3: ; Orientación 4
+	call addOffsetRight3
+	call clear_screen
+	ret
+
+UpA4: ; Orientación 1
+	call addOffsetUp4
+	call clear_screen
+	ret
+DownA4: ; Orientación 2
+	call addOffsetDown4
+	call clear_screen
+	ret
+LeftA4: ; Orientación 3
+	call addOffsetLeft4
+	call clear_screen
+	ret
+RightA4: ; Orientación 4
+	call addOffsetRight4
+	call clear_screen
+	ret
+
+UpA5: ; Orientación 1
+	call addOffsetUp5
+	call clear_screen
+	ret
+DownA5: ; Orientación 2
+	call addOffsetDown5
+	call clear_screen
+	ret
+LeftA5: ; Orientación 3
+	call addOffsetLeft5
+	call clear_screen
+	ret
+RightA5: ; Orientación 4
+	call addOffsetRight5
+	call clear_screen
+	ret
+
+UpA6: ; Orientación 1
+	call addOffsetUp6
+	call clear_screen
+	ret
+DownA6: ; Orientación 2
+	call addOffsetDown6
+	call clear_screen
+	ret
+LeftA6: ; Orientación 3
+	call addOffsetLeft6
+	call clear_screen
+	ret
+RightA6: ; Orientación 4
+	call addOffsetRight6
+	call clear_screen
+	ret
+
+UpA7: ; Orientación 1
+	call addOffsetUp7
+	call clear_screen
+	ret
+DownA7: ; Orientación 2
+	call addOffsetDown7
+	call clear_screen
+	ret
+LeftA7: ; Orientación 3
+	call addOffsetLeft7
+	call clear_screen
+	ret
+RightA7: ; Orientación 4
+	call addOffsetRight7
+	call clear_screen
+	ret
+
+UpA8: ; Orientación 1
+	call addOffsetUp8
+	call clear_screen
+	ret
+DownA8: ; Orientación 2
+	call addOffsetDown8
+	call clear_screen
+	ret
+LeftA8: ; Orientación 3
+	call addOffsetLeft8
+	call clear_screen
+	ret
+RightA8: ; Orientación 4
+	call addOffsetRight8
+	call clear_screen
+	ret
+
+UpA9: ; Orientación 1
+	call addOffsetUp9
+	call clear_screen
+	ret
+DownA9: ; Orientación 2
+	call addOffsetDown9
+	call clear_screen
+	ret
+LeftA9: ; Orientación 3
+	call addOffsetLeft9
+	call clear_screen
+	ret
+RightA9: ; Orientación 4
+	call addOffsetRight9
+	call clear_screen
+	ret
+
+UpA10: ; Orientación 1
+	call addOffsetUp10
+	call clear_screen
+	ret
+DownA10: ; Orientación 2
+	call addOffsetDown10
+	call clear_screen
+	ret
+LeftA10: ; Orientación 3
+	call addOffsetLeft10
+	call clear_screen
+	ret
+RightA10: ; Orientación 4
+	call addOffsetRight10
+	call clear_screen
+	ret
+
 drawLimits:
 	mov ecx, 0d
 	mov edx, 0d
