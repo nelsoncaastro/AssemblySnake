@@ -4,22 +4,58 @@ section .bss ;Sección donde declaramos variables, solo reservamos memoria.
 
 sigpx1: resd 1 ;Variable para almacenar la siguiente posición de X del jugador
 sigpy1: resd 1 ;Variable para almacenar la siguiente posición de Y del jugador
-
 auxpx1:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
 auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
-
 sigfx1: resd 1
 sigfy1: resd 1
+
+pheadori: resb 1 
+
+px2: resd 1
+py2: resd 1
+p2ori: resb 1
+
+px3: resd 1
+py3: resd 1
+p3ori: resb 1
+
+px4: resd 1
+py4: resd 1
+p4ori: resb 1
+
+px5: resd 1
+py5: resd 1
+p5ori: resb 1
+
+px6: resd 1
+py6: resd 1
+p6ori: resb 1
+
+px7: resd 1
+py7: resd 1
+p7ori: resb 1
+
+px8: resd 1
+py8: resd 1
+p8ori: resb 1
+
+px9: resd 1
+py9: resd 1
+p9ori: resb 1
+
+px10: resd 1
+py10: resd 1
+p10ori: resb 1
 
 section .data ;Sección donde inicializamos variables.
 
 px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
 py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
-offset: dd 10d ;Tamaño del cuadro del culebrón
+offset: dd 20d ;Tamaño del cuadro del culebrón
 
 fx1: dd 100d
 fy1: dd 50d
-foffset: dd 5d
+foffset: dd 15d
 
 section .text ;Sección del código fuente
 
@@ -163,7 +199,7 @@ pixelVerde:
 
 teclado:
 	mov ah, 01h
-	int 16h
+	int 16h ; Llamar función 1 de la INT 16h
 	jz tecret
 	mov ah, 00h
 	int 16h
@@ -183,33 +219,33 @@ movimiento:
 	jmp movsal
 Up: 
 	call UpA
-	mov bx, 1d
+	mov byte [pheadori], 1
 	jmp movsal
 Down: 
 	call DownA
-	mov bx, 2d
+	mov byte [pheadori], 2
 	jmp movsal
 Left: 
 	call LeftA
-	mov bx, 3d
+	mov byte [pheadori], 3
 	jmp movsal
 Right: 
 	call RightA
-	mov bx, 4d
+	mov byte [pheadori], 4
 movsal:ret
 
 movimientoautomatico:
 	call sleep_half_s
-cma1:cmp bx, 1d
+cma1:cmp byte [pheadori], 1d
 	jne cma2
 	call UpA
-cma2:cmp bx, 2d
+cma2:cmp byte [pheadori], 2d
 	jne cma3
 	call DownA
-cma3:cmp bx, 3d
+cma3:cmp byte [pheadori], 3d
 	jne cma4
 	call LeftA
-cma4:cmp bx, 4d
+cma4:cmp byte [pheadori], 4d
 	jne maret
 	call RightA
 maret:ret
@@ -282,7 +318,6 @@ ccl4:cmp dword [sigpy1], 410d
 clret:ret
 
 checkFruit:
-	;mov ebx, [fx1]
 	finit
 	fld dword [fx1] ; stack(st1)
 	fld dword [px1] ; stack(st0)
