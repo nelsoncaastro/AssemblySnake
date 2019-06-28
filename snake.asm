@@ -162,26 +162,248 @@ addOffsetUp:
 	fsub
 	fstp dword [py1]
 	ret
-
 addOffsetDown:
 	fld dword [py1]
 	fld dword [offset]
 	fadd
 	fstp dword [py1]
 	ret
-
 addOffsetRight:
 	fld dword [px1]
 	fld dword [offset]
 	fadd
 	fstp dword [px1]
 	ret
-
 addOffsetLeft:
 	fld dword [px1]
 	fld dword [offset]
 	fsub
 	fstp dword [px1]
+	ret
+
+addOffsetUp2:
+	fld dword [py2]
+	fld dword [offset]
+	fsub
+	fstp dword [py2]
+	ret
+addOffsetDown2:
+	fld dword [py2]
+	fld dword [offset]
+	fadd
+	fstp dword [py2]
+	ret
+addOffsetRight2:
+	fld dword [px2]
+	fld dword [offset]
+	fadd
+	fstp dword [px1]
+	ret
+addOffsetLeft2:
+	fld dword [px2]
+	fld dword [offset]
+	fsub
+	fstp dword [px1]
+	ret
+
+addOffsetUp3:
+	fld dword [py3]
+	fld dword [offset]
+	fsub
+	fstp dword [py3]
+	ret
+addOffsetDown3:
+	fld dword [py3]
+	fld dword [offset]
+	fadd
+	fstp dword [py3]
+	ret
+addOffsetRight3:
+	fld dword [px3]
+	fld dword [offset]
+	fadd
+	fstp dword [px3]
+	ret
+addOffsetLeft3:
+	fld dword [px3]
+	fld dword [offset]
+	fsub
+	fstp dword [px3]
+	ret
+
+addOffsetUp4:
+	fld dword [py4]
+	fld dword [offset]
+	fsub
+	fstp dword [py4]
+	ret
+addOffsetDown4:
+	fld dword [py4]
+	fld dword [offset]
+	fadd
+	fstp dword [py4]
+	ret
+addOffsetRight4:
+	fld dword [px4]
+	fld dword [offset]
+	fadd
+	fstp dword [px4]
+	ret
+addOffsetLeft4:
+	fld dword [px4]
+	fld dword [offset]
+	fsub
+	fstp dword [px4]
+	ret
+
+addOffsetUp5:
+	fld dword [py5]
+	fld dword [offset]
+	fsub
+	fstp dword [py5]
+	ret
+addOffsetDown5:
+	fld dword [py5]
+	fld dword [offset]
+	fadd
+	fstp dword [py5]
+	ret
+addOffsetRight5:
+	fld dword [px5]
+	fld dword [offset]
+	fadd
+	fstp dword [px5]
+	ret
+addOffsetLeft5:
+	fld dword [px5]
+	fld dword [offset]
+	fsub
+	fstp dword [px5]
+	ret
+
+addOffsetUp6:
+	fld dword [py6]
+	fld dword [offset]
+	fsub
+	fstp dword [py6]
+	ret
+addOffsetDown6:
+	fld dword [py6]
+	fld dword [offset]
+	fadd
+	fstp dword [py6]
+	ret
+addOffsetRight6:
+	fld dword [px6]
+	fld dword [offset]
+	fadd
+	fstp dword [px6]
+	ret
+addOffsetLeft6:
+	fld dword [px6]
+	fld dword [offset]
+	fsub
+	fstp dword [px6]
+	ret
+
+addOffsetUp7:
+	fld dword [py7]
+	fld dword [offset]
+	fsub
+	fstp dword [py7]
+	ret
+addOffsetDown7:
+	fld dword [py7]
+	fld dword [offset]
+	fadd
+	fstp dword [py7]
+	ret
+addOffsetRight7:
+	fld dword [px7]
+	fld dword [offset]
+	fadd
+	fstp dword [px7]
+	ret
+addOffsetLeft7:
+	fld dword [px7]
+	fld dword [offset]
+	fsub
+	fstp dword [px7]
+	ret
+
+addOffsetUp8:
+	fld dword [py8]
+	fld dword [offset]
+	fsub
+	fstp dword [py8]
+	ret
+addOffsetDown8:
+	fld dword [py8]
+	fld dword [offset]
+	fadd
+	fstp dword [py8]
+	ret
+addOffsetRight8:
+	fld dword [px8]
+	fld dword [offset]
+	fadd
+	fstp dword [px8]
+	ret
+addOffsetLeft8:
+	fld dword [px8]
+	fld dword [offset]
+	fsub
+	fstp dword [px8]
+	ret
+
+addOffsetUp9:
+	fld dword [py9]
+	fld dword [offset]
+	fsub
+	fstp dword [py9]
+	ret
+addOffsetDown9:
+	fld dword [py9]
+	fld dword [offset]
+	fadd
+	fstp dword [py9]
+	ret
+addOffsetRight9:
+	fld dword [px9]
+	fld dword [offset]
+	fadd
+	fstp dword [px9]
+	ret
+addOffsetLeft9:
+	fld dword [px9]
+	fld dword [offset]
+	fsub
+	fstp dword [px9]
+	ret
+
+addOffsetUp10:
+	fld dword [py10]
+	fld dword [offset]
+	fsub
+	fstp dword [py10]
+	ret
+addOffsetDown10:
+	fld dword [py10]
+	fld dword [offset]
+	fadd
+	fstp dword [py10]
+	ret
+addOffsetRight10:
+	fld dword [px10]
+	fld dword [offset]
+	fadd
+	fstp dword [px10]
+	ret
+addOffsetLeft10:
+	fld dword [px10]
+	fld dword [offset]
+	fsub
+	fstp dword [px10]
 	ret
 
 pixelBlanco:
