@@ -71,7 +71,7 @@ lupita:
 	call drawSnake
 	call teclado
 	call movimiento
-	call movimientoautomatico
+	call moveyourbody
 	call checkLimits
 	call checkFruit
 	jmp lupita
@@ -457,9 +457,13 @@ Right:
 	mov byte [pheadori], 4
 movsal:ret
 
-movimientoautomatico:
+moveyourbody:
 	call sleep_half_s
-cma1:cmp byte [pheadori], 1d
+	call movimientoautomatico
+	ret
+
+movimientoautomatico:
+	cmp byte [pheadori], 1d
 	jne cma2
 	call UpA
 cma2:cmp byte [pheadori], 2d
@@ -472,6 +476,141 @@ cma4:cmp byte [pheadori], 4d
 	jne maret
 	call RightA
 maret:ret
+
+movimientoautomatico2:
+	cmp byte [p2ori], 1d
+	jne cma22
+	call UpA2
+cma22:cmp byte [p2ori], 2d
+	jne cma23
+	call DownA2
+cma23:cmp byte [p2ori], 3d
+	jne cma24
+	call LeftA2
+cma24:cmp byte [p2ori], 4d
+	jne maret2
+	call RightA
+maret2:ret
+
+movimientoautomatico3:
+	cmp byte [p3ori], 1d
+	jne cma32
+	call UpA3
+cma32:cmp byte [p3ori], 2d
+	jne cma33
+	call DownA3
+cma33:cmp byte [p3ori], 3d
+	jne cma34
+	call LeftA3
+cma34:cmp byte [p3ori], 4d
+	jne maret3
+	call RightA
+maret3:ret
+
+movimientoautomatico4:
+	cmp byte [p4ori], 1d
+	jne cma42
+	call UpA4
+cma42:cmp byte [p4ori], 2d
+	jne cma43
+	call DownA4
+cma43:cmp byte [p4ori], 3d
+	jne cma44
+	call LeftA4
+cma44:cmp byte [p4ori], 4d
+	jne maret4
+	call RightA
+maret4:ret
+
+movimientoautomatico5:
+	cmp byte [p5ori], 1d
+	jne cma52
+	call UpA5
+cma52:cmp byte [p5ori], 2d
+	jne cma53
+	call DownA5
+cma53:cmp byte [p5ori], 3d
+	jne cma54
+	call LeftA5
+cma54:cmp byte [p5ori], 4d
+	jne maret5
+	call RightA
+maret5:ret
+
+movimientoautomatico6:
+	cmp byte [p6ori], 1d
+	jne cma62
+	call UpA6
+cma62:cmp byte [p6ori], 2d
+	jne cma63
+	call DownA6
+cma63:cmp byte [p6ori], 3d
+	jne cma64
+	call LeftA6
+cma64:cmp byte [p6ori], 4d
+	jne maret6
+	call RightA
+maret6:ret
+
+movimientoautomatico7:
+	cmp byte [p7ori], 1d
+	jne cma72
+	call UpA7
+cma72:cmp byte [p7ori], 2d
+	jne cma73
+	call DownA7
+cma73:cmp byte [p7ori], 3d
+	jne cma74
+	call LeftA7
+cma74:cmp byte [p7ori], 4d
+	jne maret7
+	call RightA
+maret7:ret
+
+movimientoautomatico8:
+	cmp byte [p8ori], 1d
+	jne cma82
+	call UpA8
+cma82:cmp byte [p8ori], 2d
+	jne cma83
+	call DownA8
+cma83:cmp byte [p8ori], 3d
+	jne cma84
+	call LeftA8
+cma84:cmp byte [p8ori], 4d
+	jne maret8
+	call RightA
+maret8:ret
+
+movimientoautomatico9:
+	cmp byte [p9ori], 1d
+	jne cma92
+	call UpA9
+cma92:cmp byte [p9ori], 2d
+	jne cma93
+	call DownA9
+cma93:cmp byte [p9ori], 3d
+	jne cma94
+	call LeftA9
+cma94:cmp byte [p9ori], 4d
+	jne maret9
+	call RightA
+maret9:ret
+
+movimientoautomatico10:
+	cmp byte [p10ori], 1d
+	jne cma102
+	call UpA10
+cma102:cmp byte [p10ori], 2d
+	jne cma103
+	call DownA10
+cma103:cmp byte [p10ori], 3d
+	jne cma104
+	call LeftA10
+cma104:cmp byte [p10ori], 4d
+	jne maret10
+	call RightA
+maret10:ret
 
 UpA: ; Orientación 1
 	call addOffsetUp
@@ -741,8 +880,10 @@ cf3:
 	je cfa
 	jmp checkret
 
-cfa:call fin
+cfa:call eatFruit
 checkret:ret
 
 eatFruit:
+	inc byte [snakesize]
+	mov si, [pheadori]
 	ret
