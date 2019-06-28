@@ -82,6 +82,7 @@ lupita:
 ;=======Subrutinas
 
 fin: 
+	call loser
 	int 20h
 	ret
 
@@ -1171,3 +1172,131 @@ addOffsetLeft10:
 	fsub
 	fstp dword [px10]
 	ret
+
+loser:
+	call setup	
+	call palabra
+ret
+
+setup: 
+	MOV AH, 00H 
+	MOV AL, 03H 
+	INT 10H
+
+	mov bh, 01h
+	mov dh, 012d
+	mov dl, 020d
+	mov ah, 02h
+	int 10h
+ret
+
+palabra:
+	call spacechar2
+	call Lchar
+	call Ochar
+	call Schar
+	call Echar
+	call Rchar
+	call spacechar
+	call Lchar
+	call Ochar
+	call Schar
+	call Echar
+	call Rchar
+	call spacechar
+	call Mchar
+	call Achar
+	call Cchar
+	call spacechar
+	call Uchar
+	call Schar
+	call Echar
+	call Rchar
+	
+ret
+
+spacechar:
+	mov al, " " 
+	call mostrar 
+ret
+
+spacechar2:
+	MOV AL, " " 
+	CALL mostrar2 
+ret
+
+Lchar:
+	MOV AL, "L" 
+	CALL mostrar 
+ret
+
+Ochar:
+	MOV AL, "O" 
+	CALL mostrar
+ret 
+
+Schar:
+	MOV AL, "S" 
+	CALL mostrar
+ret 
+
+Echar:
+	MOV AL, "E" 
+	CALL mostrar
+ret 
+
+Rchar:
+	MOV AL, "R" 
+	CALL mostrar
+ret 
+
+Cchar:
+	MOV AL, "C" 
+	CALL mostrar 
+ret
+
+Uchar:
+	MOV AL, "U" 
+	CALL mostrar
+ret 
+
+Mchar:
+	MOV AL, "M" 
+	CALL mostrar
+ret 
+
+Achar:
+	MOV AL, "A" 
+	CALL mostrar
+ret 
+
+
+mostrar: 
+
+	mov ah, 02h
+	inc dl
+	int 10h
+
+	MOV AH, 09H 
+	MOV BL, 0D1H 
+	MOV BH, 00H
+	MOV CX, 01H 
+	INT 10H 
+
+	
+ret 
+
+mostrar2: 
+
+	mov ah, 02h
+	inc dl
+	int 10h
+
+	MOV AH, 09H 
+	MOV BL, 00H 
+	MOV BH, 00H
+	MOV CX, 01H 
+	INT 10H 
+
+	
+RET 
