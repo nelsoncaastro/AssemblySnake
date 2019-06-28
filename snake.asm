@@ -2,60 +2,60 @@ org 100h ;Indica en que dirección de memoria comienza el programa.
 
 section .bss ;Sección donde declaramos variables, solo reservamos memoria.
 
-sigpx1: resd 1 ;Variable para almacenar la siguiente posición de X del jugador
-sigpy1: resd 1 ;Variable para almacenar la siguiente posición de Y del jugador
-auxpx1:	resd 1 ;Variable para almacenar la transición de la posición de X del jugador
-auxpy1: resd 1 ;Variable para almacenar la transición de la posición de Y del jugador
-sigfx1: resd 1
-sigfy1: resd 1
+sigpx1: resw 1 ;Variable para almacenar la siguiente posición de X del jugador
+sigpy1: resw 1 ;Variable para almacenar la siguiente posición de Y del jugador
+auxpx1:	resw 1 ;Variable para almacenar la transición de la posición de X del jugador
+auxpy1: resw 1 ;Variable para almacenar la transición de la posición de Y del jugador
+sigfx1: resw 1
+sigfy1: resw 1
 
 section .data ;Sección donde inicializamos variables.
 
-px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
-py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
-offset: dd 20d ;Tamaño del cuadro del culebrón
+px1: dw  320d ;Variable para almacenar la posición de X actual del jugador
+py1: dw	 204d ;Variable para almacenar la posición de X actual del jugador
+offset: dw 20d ;Tamaño del cuadro del culebrón
 pheadori: db 0 
 
 snakesize: db 1
 
-fx1: dd 100d
-fy1: dd 50d
-foffset: dd 15d
+fx1: dw 100d
+fy1: dw 50d
+foffset: dw 15d
 
-px2: dd 0
-py2: dd 0
+px2: dw 0
+py2: dw 0
 p2ori: db 0
 
-px3: dd 0
-py3: dd 0
+px3: dw 0
+py3: dw 0
 p3ori: db 0
 
-px4: dd 0
-py4: dd 0
+px4: dw 0
+py4: dw 0
 p4ori: db 0
 
-px5: dd 0
-py5: dd 0
+px5: dw 0
+py5: dw 0
 p5ori: db 0
 
-px6: dd 0
-py6: dd 0
+px6: dw 0
+py6: dw 0
 p6ori: db 0
 
-px7: dd 0
-py7: dd 0
+px7: dw 0
+py7: dw 0
 p7ori: db 0
 
-px8: dd 0
-py8: dd 0
+px8: dw 0
+py8: dw 0
 p8ori: db 0
 
-px9: resd 0
-py9: resd 0
+px9: dw 0
+py9: dw 0
 p9ori: db 0
 
-px10: resd 0
-py10: resd 0
+px10: dw 0
+py10: dw 0
 p10ori: db 0
 
 section .text ;Sección del código fuente
@@ -64,7 +64,6 @@ global start
 
 start:
     call iniciarModoVideo
-	finit
 lupita:
 	call drawLimits
 	call drawFruit
@@ -72,8 +71,8 @@ lupita:
 	call teclado
 	call movimiento
 	call movimientoautomatico
-	call checkLimits
-	call checkFruit
+	;call checkLimits
+	;call checkFruit
 	jmp lupita
 
 ;=======Subrutinas
@@ -107,81 +106,73 @@ clear_screen:
 	ret
 
 drawSnake:
-	mov ecx, [px1]
-	mov edx, [py1]
+	mov cx, [px1]
+	mov dx, [py1]
 	call sigposition
 sigd:call pixelBlanco
-	inc ecx	
-	cmp ecx, [sigpx1]
+	inc cx	
+	cmp cx, [sigpx1]
 	jne sigd
-	mov ecx, [px1]
-	inc edx
-	cmp edx, [sigpy1]
+	mov cx, [px1]
+	inc dx
+	cmp dx, [sigpy1]
 	jne sigd
 	ret
 
 drawFruit:
-	mov ecx, [fx1]
-	mov edx, [fy1]
+	mov cx, [fx1]
+	mov dx, [fy1]
 	call fsigposition
 fsigd:call pixelVerde
-	inc ecx
-	cmp ecx, [sigfx1]
+	inc cx
+	cmp cx, [sigfx1]
 	jne fsigd
-	mov ecx, [fx1]
-	inc edx
-	cmp edx, [sigfy1]
+	mov cx, [fx1]
+	inc dx
+	cmp dx, [sigfy1]
 	jne fsigd
 	ret
 
 fsigposition:
-	fld dword [fx1]
-	fld dword [foffset]
-	fadd
-	fstp dword [sigfx1]
-	fld dword [fy1]
-	fld dword [foffset]
-	fadd
-	fstp dword [sigfy1]
+	mov bx, [fx1]
+	add bx, [foffset]
+	mov [sigfx1], bx
+	mov bx, [fy1]
+	add bx, [foffset]
+	mov [sigfy1], bx
 	ret
 
 sigposition:
-	fld dword [px1]
-	fld dword [offset]
-	fadd
-	fstp dword [sigpx1]
-	fld dword [py1]
-	fld dword [offset]
-	fadd
-	fstp dword [sigpy1]
+	mov bx, [px1]
+	add bx, [offset]
+	mov [sigpx1], bx
+	mov bx, [py1]
+	add bx, [offset]
+	mov [sigpy1], bx
 	ret
 
 addOffsetUp:
-	fld dword [py1]
-	fld dword [offset]
-	fsub
-	fstp dword [py1]
+	mov bx, [py1]
+	sub bx, [offset]
+	mov [py1], bx
 	ret
 
 addOffsetDown:
-	fld dword [py1]
-	fld dword [offset]
-	fadd
-	fstp dword [py1]
+	mov bx, [py1]
+	add bx, [offset]
+	mov [py1], bx
 	ret
 
 addOffsetRight:
-	fld dword [px1]
-	fld dword [offset]
-	fadd
-	fstp dword [px1]
+	mov bx, [px1]
+	add bx, [offset]
+	mov [px1], bx
 	ret
 
 addOffsetLeft:
-	fld dword [px1]
-	fld dword [offset]
-	fsub
-	fstp dword [px1]
+	mov bx, [px1]
+	sub bx, [offset]
+	mov [px1], bx
 	ret
 
 pixelBlanco:
@@ -269,101 +260,72 @@ RightA: ; Orientación 4
 	ret
 
 drawLimits:
-	mov ecx, 0d
-	mov edx, 0d
+	mov cx, 0d
+	mov dx, 0d
 sigl1:
 	call pixelBlanco
-	inc ecx
-	cmp ecx, 639d
+	inc cx
+	cmp cx, 639d
 	jne sigl1
 
-	mov ecx, 0d
-	mov edx, 408d
+	mov cx, 0d
+	mov dx, 408d
 sigl2:
 	call pixelBlanco
-	inc ecx
-	cmp ecx, 639d
+	inc cx
+	cmp cx, 639d
 	jne sigl2
 
-	mov ecx, 0d
-	mov edx, 0d
+	mov cx, 0d
+	mov dx, 0d
 sigl3:
 	call pixelBlanco
-	inc edx
-	cmp edx, 408d
+	inc dx
+	cmp dx, 408d
 	jne sigl3
 
-	mov ecx, 639d
-	mov edx, 0d
+	mov cx, 639d
+	mov dx, 0d
 sigl4:
 	call pixelBlanco
-	inc edx
-	cmp edx, 408d
+	inc dx
+	cmp dx, 408d
 	jne sigl4
 	ret
 
 
 checkLimits:
-	cmp dword [px1], 0d
+	cmp word [px1], 0d
 	jne ccl2
 	call fin
-ccl2:cmp dword [px1], 640d
+ccl2:cmp word [px1], 640d
 	jne ccl3
 	call fin
-ccl3:cmp dword [py1], 10d
+ccl3:cmp word [py1], 10d
 	jnb ccl4
 	call fin
-ccl4:cmp dword [sigpy1], 410d
+ccl4:cmp word [sigpy1], 410d
 	jna clret
 	call fin
 clret:ret
 
 checkFruit:
-	finit
-	fld dword [fx1] ; stack(st1)
-	fld dword [px1] ; stack(st0)
-	fcom st0, st1
-	fstsw ax
-
-	and eax, 0100011100000000B  ; operación binaria para solo considerar las banderas de condición
-	cmp eax, 0000000100000000B   ; st0 < st1
-	je cf1
+	mov bx, [fx1]
+	cmp [px1], bx
+	jb cf1
 	jmp checkret
-
 cf1:
-	finit
-	fld dword [fx1] ; stack(st1)
-	fld dword [sigpx1] ; stack(st0)
-	fcom st0, st1
-	fstsw ax
-
-	and eax, 0100011100000000B ; operación binaria para solo considerar las banderas de condición
-	cmp eax, 0000000000000000B ; st0 > st1
-	je cf2
+	cmp [sigpx1], bx
+	jg cf2
 	jmp checkret
-
 cf2:
-	finit
-	fld dword [fy1] ; stack(st1)
-	fld dword [py1] ; stack(st0)
-	fcom st0, st1
-	fstsw ax
-
-	and eax, 0100011100000000B 	 ; operación binaria para solo considerar las banderas de condición
-	cmp eax, 0000000100000000B   ; st0 < st1
-	je cf3
+	mov bx, [fy1]
+	cmp [py1], bx
+	jb cf3
 	jmp checkret
-
 cf3:
-	finit
-	fld dword [fy1] ; stack(st1)
-	fld dword [sigpy1]  ; stack(st0)
-	fcom st0, st1
-	fstsw ax
-
-	and eax, 0100011100000000B ;operación binaria para solo considerar las banderas de condición
-	cmp eax, 0000000000000000B ; st0 > st1
-	je cfa
+	cmp [sigpy1], bx
+	jg cfa
 	jmp checkret
 
 cfa:call fin
