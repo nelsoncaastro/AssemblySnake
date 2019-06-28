@@ -13,13 +13,17 @@ sigfy1: resd 1
 
 section .data ;Sección donde inicializamos variables.
 
+%define snakex(i) byte [es:i]
+%define snakey(i) byte [es:i+500]
+%define snaked(i) byte [es:i+1000]
+
 px1: dd  320d ;Variable para almacenar la posición de X actual del jugador
 py1: dd	 204d ;Variable para almacenar la posición de X actual del jugador
-offset: dd 10d ;Tamaño del cuadro del culebrón
+offset: dd 20d ;Tamaño del cuadro del culebrón
 
 fx1: dd 100d
 fy1: dd 50d
-foffset: dd 5d
+foffset: dd 15d
 
 section .text ;Sección del código fuente
 
