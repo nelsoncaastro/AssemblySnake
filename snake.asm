@@ -68,7 +68,6 @@ global start
 start:
     call iniciarModoVideo
 	finit
-	call eatFruit
 lupita:
 	call drawLimits
 	call drawFruit
@@ -375,256 +374,6 @@ fsigposition:
 	fstp dword [sigfy1]
 	ret
 
-addOffsetUp:
-	fld dword [py1]
-	fld dword [offset]
-	fsub
-	fstp dword [py1]
-	ret
-addOffsetDown:
-	fld dword [py1]
-	fld dword [offset]
-	fadd
-	fstp dword [py1]
-	ret
-addOffsetRight:
-	fld dword [px1]
-	fld dword [offset]
-	fadd
-	fstp dword [px1]
-	ret
-addOffsetLeft:
-	fld dword [px1]
-	fld dword [offset]
-	fsub
-	fstp dword [px1]
-	ret
-
-addOffsetUp2:
-	fld dword [py2]
-	fld dword [offset]
-	fsub
-	fstp dword [py2]
-	ret
-addOffsetDown2:
-	fld dword [py2]
-	fld dword [offset]
-	fadd
-	fstp dword [py2]
-	ret
-addOffsetRight2:
-	fld dword [px2]
-	fld dword [offset]
-	fadd
-	fstp dword [px2]
-	ret
-addOffsetLeft2:
-	fld dword [px2]
-	fld dword [offset]
-	fsub
-	fstp dword [px2]
-	ret
-
-addOffsetUp3:
-	fld dword [py3]
-	fld dword [offset]
-	fsub
-	fstp dword [py3]
-	ret
-addOffsetDown3:
-	fld dword [py3]
-	fld dword [offset]
-	fadd
-	fstp dword [py3]
-	ret
-addOffsetRight3:
-	fld dword [px3]
-	fld dword [offset]
-	fadd
-	fstp dword [px3]
-	ret
-addOffsetLeft3:
-	fld dword [px3]
-	fld dword [offset]
-	fsub
-	fstp dword [px3]
-	ret
-
-addOffsetUp4:
-	fld dword [py4]
-	fld dword [offset]
-	fsub
-	fstp dword [py4]
-	ret
-addOffsetDown4:
-	fld dword [py4]
-	fld dword [offset]
-	fadd
-	fstp dword [py4]
-	ret
-addOffsetRight4:
-	fld dword [px4]
-	fld dword [offset]
-	fadd
-	fstp dword [px4]
-	ret
-addOffsetLeft4:
-	fld dword [px4]
-	fld dword [offset]
-	fsub
-	fstp dword [px4]
-	ret
-
-addOffsetUp5:
-	fld dword [py5]
-	fld dword [offset]
-	fsub
-	fstp dword [py5]
-	ret
-addOffsetDown5:
-	fld dword [py5]
-	fld dword [offset]
-	fadd
-	fstp dword [py5]
-	ret
-addOffsetRight5:
-	fld dword [px5]
-	fld dword [offset]
-	fadd
-	fstp dword [px5]
-	ret
-addOffsetLeft5:
-	fld dword [px5]
-	fld dword [offset]
-	fsub
-	fstp dword [px5]
-	ret
-
-addOffsetUp6:
-	fld dword [py6]
-	fld dword [offset]
-	fsub
-	fstp dword [py6]
-	ret
-addOffsetDown6:
-	fld dword [py6]
-	fld dword [offset]
-	fadd
-	fstp dword [py6]
-	ret
-addOffsetRight6:
-	fld dword [px6]
-	fld dword [offset]
-	fadd
-	fstp dword [px6]
-	ret
-addOffsetLeft6:
-	fld dword [px6]
-	fld dword [offset]
-	fsub
-	fstp dword [px6]
-	ret
-
-addOffsetUp7:
-	fld dword [py7]
-	fld dword [offset]
-	fsub
-	fstp dword [py7]
-	ret
-addOffsetDown7:
-	fld dword [py7]
-	fld dword [offset]
-	fadd
-	fstp dword [py7]
-	ret
-addOffsetRight7:
-	fld dword [px7]
-	fld dword [offset]
-	fadd
-	fstp dword [px7]
-	ret
-addOffsetLeft7:
-	fld dword [px7]
-	fld dword [offset]
-	fsub
-	fstp dword [px7]
-	ret
-
-addOffsetUp8:
-	fld dword [py8]
-	fld dword [offset]
-	fsub
-	fstp dword [py8]
-	ret
-addOffsetDown8:
-	fld dword [py8]
-	fld dword [offset]
-	fadd
-	fstp dword [py8]
-	ret
-addOffsetRight8:
-	fld dword [px8]
-	fld dword [offset]
-	fadd
-	fstp dword [px8]
-	ret
-addOffsetLeft8:
-	fld dword [px8]
-	fld dword [offset]
-	fsub
-	fstp dword [px8]
-	ret
-
-addOffsetUp9:
-	fld dword [py9]
-	fld dword [offset]
-	fsub
-	fstp dword [py9]
-	ret
-addOffsetDown9:
-	fld dword [py9]
-	fld dword [offset]
-	fadd
-	fstp dword [py9]
-	ret
-addOffsetRight9:
-	fld dword [px9]
-	fld dword [offset]
-	fadd
-	fstp dword [px9]
-	ret
-addOffsetLeft9:
-	fld dword [px9]
-	fld dword [offset]
-	fsub
-	fstp dword [px9]
-	ret
-
-addOffsetUp10:
-	fld dword [py10]
-	fld dword [offset]
-	fsub
-	fstp dword [py10]
-	ret
-addOffsetDown10:
-	fld dword [py10]
-	fld dword [offset]
-	fadd
-	fstp dword [py10]
-	ret
-addOffsetRight10:
-	fld dword [px10]
-	fld dword [offset]
-	fadd
-	fstp dword [px10]
-	ret
-addOffsetLeft10:
-	fld dword [px10]
-	fld dword [offset]
-	fsub
-	fstp dword [px10]
-	ret
-
 pixelBlanco:
 	mov ah, 0Ch
 	mov al, 1111b ;blanco
@@ -697,6 +446,46 @@ moveyourbody:
 	mov si, [pheadori]
 	mov [p2ori], si	
 	cmp byte [snakesize], 2d
+	je mybret
+	call movimientoautomatico3
+	mov si, [p2ori]
+	mov [p3ori], si	
+	cmp byte [snakesize], 3d
+	je mybret
+	call movimientoautomatico4
+	mov si, [p3ori]
+	mov [p4ori], si	
+	cmp byte [snakesize], 4d
+	je mybret
+	call movimientoautomatico5
+	mov si, [p4ori]
+	mov [p5ori], si	
+	cmp byte [snakesize], 5d
+	je mybret
+	call movimientoautomatico6
+	mov si, [p5ori]
+	mov [p6ori], si	
+	cmp byte [snakesize], 6d
+	je mybret
+	call movimientoautomatico7
+	mov si, [p6ori]
+	mov [p7ori], si	
+	cmp byte [snakesize], 7d
+	je mybret
+call movimientoautomatico8
+	mov si, [p7ori]
+	mov [p8ori], si	
+	cmp byte [snakesize], 8d
+	je mybret
+call movimientoautomatico9
+	mov si, [p8ori]
+	mov [p9ori], si	
+	cmp byte [snakesize], 9d
+	je mybret
+call movimientoautomatico10
+	mov si, [p9ori]
+	mov [p10ori], si	
+	cmp byte [snakesize], 10d
 	je mybret
 mybret:ret
 
@@ -1126,9 +915,259 @@ eatFruit:
 	mov si, [pheadori]
 	mov [p2ori],si
 	mov si, [px1]
-	sub si, [offset]
+	;sub si, [offset]
 	mov [px2], si
 	mov si, [py1]
-	sub si, [offset]
+	;sub si, [offset]
 	mov [py2], si
+	ret
+
+addOffsetUp:
+	fld dword [py1]
+	fld dword [offset]
+	fsub
+	fstp dword [py1]
+	ret
+addOffsetDown:
+	fld dword [py1]
+	fld dword [offset]
+	fadd
+	fstp dword [py1]
+	ret
+addOffsetRight:
+	fld dword [px1]
+	fld dword [offset]
+	fadd
+	fstp dword [px1]
+	ret
+addOffsetLeft:
+	fld dword [px1]
+	fld dword [offset]
+	fsub
+	fstp dword [px1]
+	ret
+
+addOffsetUp2:
+	fld dword [py1]
+	fld dword [offset]
+	fsub
+	fstp dword [py2]
+	ret
+addOffsetDown2:
+	fld dword [py1]
+	fld dword [offset]
+	fadd
+	fstp dword [py2]
+	ret
+addOffsetRight2:
+	fld dword [px1]
+	fld dword [offset]
+	fadd
+	fstp dword [px2]
+	ret
+addOffsetLeft2:
+	fld dword [px1]
+	fld dword [offset]
+	fsub
+	fstp dword [px2]
+	ret
+
+addOffsetUp3:
+	fld dword [py2]
+	fld dword [offset]
+	fsub
+	fstp dword [py3]
+	ret
+addOffsetDown3:
+	fld dword [py2]
+	fld dword [offset]
+	fadd
+	fstp dword [py3]
+	ret
+addOffsetRight3:
+	fld dword [px2]
+	fld dword [offset]
+	fadd
+	fstp dword [px3]
+	ret
+addOffsetLeft3:
+	fld dword [px2]
+	fld dword [offset]
+	fsub
+	fstp dword [px3]
+	ret
+
+addOffsetUp4:
+	fld dword [py3]
+	fld dword [offset]
+	fsub
+	fstp dword [py4]
+	ret
+addOffsetDown4:
+	fld dword [py3]
+	fld dword [offset]
+	fadd
+	fstp dword [py4]
+	ret
+addOffsetRight4:
+	fld dword [px3]
+	fld dword [offset]
+	fadd
+	fstp dword [px4]
+	ret
+addOffsetLeft4:
+	fld dword [px3]
+	fld dword [offset]
+	fsub
+	fstp dword [px4]
+	ret
+
+addOffsetUp5:
+	fld dword [py4]
+	fld dword [offset]
+	fsub
+	fstp dword [py5]
+	ret
+addOffsetDown5:
+	fld dword [py4]
+	fld dword [offset]
+	fadd
+	fstp dword [py5]
+	ret
+addOffsetRight5:
+	fld dword [px4]
+	fld dword [offset]
+	fadd
+	fstp dword [px5]
+	ret
+addOffsetLeft5:
+	fld dword [px4]
+	fld dword [offset]
+	fsub
+	fstp dword [px5]
+	ret
+
+addOffsetUp6:
+	fld dword [py5]
+	fld dword [offset]
+	fsub
+	fstp dword [py6]
+	ret
+addOffsetDown6:
+	fld dword [py5]
+	fld dword [offset]
+	fadd
+	fstp dword [py6]
+	ret
+addOffsetRight6:
+	fld dword [px5]
+	fld dword [offset]
+	fadd
+	fstp dword [px6]
+	ret
+addOffsetLeft6:
+	fld dword [px5]
+	fld dword [offset]
+	fsub
+	fstp dword [px6]
+	ret
+
+addOffsetUp7:
+	fld dword [py6]
+	fld dword [offset]
+	fsub
+	fstp dword [py7]
+	ret
+addOffsetDown7:
+	fld dword [py6]
+	fld dword [offset]
+	fadd
+	fstp dword [py7]
+	ret
+addOffsetRight7:
+	fld dword [px6]
+	fld dword [offset]
+	fadd
+	fstp dword [px7]
+	ret
+addOffsetLeft7:
+	fld dword [px6]
+	fld dword [offset]
+	fsub
+	fstp dword [px7]
+	ret
+
+addOffsetUp8:
+	fld dword [py7]
+	fld dword [offset]
+	fsub
+	fstp dword [py8]
+	ret
+addOffsetDown8:
+	fld dword [py7]
+	fld dword [offset]
+	fadd
+	fstp dword [py8]
+	ret
+addOffsetRight8:
+	fld dword [px7]
+	fld dword [offset]
+	fadd
+	fstp dword [px8]
+	ret
+addOffsetLeft8:
+	fld dword [px7]
+	fld dword [offset]
+	fsub
+	fstp dword [px8]
+	ret
+
+addOffsetUp9:
+	fld dword [py8]
+	fld dword [offset]
+	fsub
+	fstp dword [py9]
+	ret
+addOffsetDown9:
+	fld dword [py8]
+	fld dword [offset]
+	fadd
+	fstp dword [py9]
+	ret
+addOffsetRight9:
+	fld dword [px8]
+	fld dword [offset]
+	fadd
+	fstp dword [px9]
+	ret
+addOffsetLeft9:
+	fld dword [px8]
+	fld dword [offset]
+	fsub
+	fstp dword [px9]
+	ret
+
+addOffsetUp10:
+	fld dword [py9]
+	fld dword [offset]
+	fsub
+	fstp dword [py10]
+	ret
+addOffsetDown10:
+	fld dword [py9]
+	fld dword [offset]
+	fadd
+	fstp dword [py10]
+	ret
+addOffsetRight10:
+	fld dword [px9]
+	fld dword [offset]
+	fadd
+	fstp dword [px10]
+	ret
+addOffsetLeft10:
+	fld dword [px9]
+	fld dword [offset]
+	fsub
+	fstp dword [px10]
 	ret
