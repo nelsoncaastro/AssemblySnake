@@ -17,6 +17,7 @@ offset: dd 20d ;Tamaño del cuadro del culebrón
 pheadori: db 0 
 
 snakesize: db 1
+actualpos: db 1
 
 fx1: dd 100d
 fy1: dd 50d
@@ -71,7 +72,7 @@ lupita:
 	call drawSnake
 	call teclado
 	call movimiento
-	call movimientoautomatico
+	call moveyourbody
 	call checkLimits
 	call checkFruit
 	jmp lupita
@@ -235,21 +236,98 @@ Right:
 	mov byte [pheadori], 4
 movsal:ret
 
+moveyourbody:
+	mov byte [actualpos], 1
+	call movimientoautomatico
+	cmp byte [snakesize],1
+	je myret
+	mov byte [actualpos], 2
+	call movimientoautomatico
+	cmp byte [snakesize],2
+	je myret
+	mov byte [actualpos], 3
+	call movimientoautomatico
+	cmp byte [snakesize],3
+	je myret
+	mov byte [actualpos], 4
+	call movimientoautomatico
+	cmp byte [snakesize],4
+	je myret
+	mov byte [actualpos], 5
+	call movimientoautomatico
+	cmp byte [snakesize],5
+	je myret
+	mov byte [actualpos], 6
+	call movimientoautomatico
+	cmp byte [snakesize],6
+	je myret
+	mov byte [actualpos], 7
+	call movimientoautomatico
+	cmp byte [snakesize],7
+	je myret
+	mov byte [actualpos], 8
+	call movimientoautomatico
+	cmp byte [snakesize],8
+	je myret
+	mov byte [actualpos], 9
+	call movimientoautomatico
+	cmp byte [snakesize],9
+	je myret
+	mov byte [actualpos], 10
+	call movimientoautomatico
+	cmp byte [snakesize], 10
+	je myret
+myret:ret
+
 movimientoautomatico:
+	call getactualposindx
 	call sleep_half_s
-cma1:cmp byte [pheadori], 1d
+cma1:cmp dx, 1
 	jne cma2
 	call UpA
-cma2:cmp byte [pheadori], 2d
+cma2:cmp dx, 2
 	jne cma3
 	call DownA
-cma3:cmp byte [pheadori], 3d
+cma3:cmp dx, 3
 	jne cma4
 	call LeftA
-cma4:cmp byte [pheadori], 4d
+cma4:cmp dx, 4
 	jne maret
 	call RightA
 maret:ret
+
+getactualposindx:
+	cmp byte [actualpos], 1
+	jne gma1
+	mov dx, [pheadori]
+gma1:cmp byte [actualpos], 2
+	jne gma2
+	mov dx, [p2ori]
+gma2:cmp byte [actualpos], 3
+	jne gma3
+	mov dx, [p3ori]
+gma3:cmp byte [actualpos], 4
+	jne gma4
+	mov dx, [p4ori]
+gma4:cmp byte [actualpos], 5
+	jne gma5
+	mov dx, [p5ori]
+gma5:cmp byte [actualpos], 6
+	jne gma6
+	mov dx, [p6ori]
+gma6:cmp byte [actualpos], 7
+	jne gma7
+	mov dx, [p7ori]
+gma7:cmp byte [actualpos], 8
+	jne gma8
+	mov dx, [p8ori]
+gma8:cmp byte [actualpos], 9
+	jne gma9
+	mov dx, [p9ori]
+gma9:cmp byte [actualpos], 10
+	jne gma10
+	mov dx, [p10ori]
+gma10:ret
 
 UpA: ; Orientación 1
 	call addOffsetUp
