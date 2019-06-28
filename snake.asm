@@ -436,6 +436,27 @@ drawyourbody:
 	call drawSnake3
 	cmp byte [snakesize], 3d
 	je dybret
+	call drawSnake4
+	cmp byte [snakesize], 4d
+	je dybret
+	call drawSnake5
+	cmp byte [snakesize], 5d
+	je dybret
+	call drawSnake6
+	cmp byte [snakesize], 6d
+	je dybret
+	call drawSnake7
+	cmp byte [snakesize], 7d
+	je dybret
+	call drawSnake8
+	cmp byte [snakesize], 8d
+	je dybret
+	call drawSnake9
+	cmp byte [snakesize], 9d
+	je dybret
+	call drawSnake10
+	cmp byte [snakesize], 10d
+	je dybret
 dybret:ret
 
 moveyourbody:
@@ -871,7 +892,6 @@ checkFruit:
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf1
 	jmp checkret
-
 cf1:
 	finit
 	fld dword [fx1] ; stack(st1)
@@ -883,31 +903,26 @@ cf1:
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cf2
 	jmp checkret
-
 cf2:
 	finit
 	fld dword [fy1] ; stack(st1)
 	fld dword [py1] ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B 	 ; operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000100000000B   ; st0 < st1
 	je cf3
 	jmp checkret
-
 cf3:
 	finit
 	fld dword [fy1] ; stack(st1)
 	fld dword [sigpy1]  ; stack(st0)
 	fcom st0, st1
 	fstsw ax
-
 	and eax, 0100011100000000B ;operación binaria para solo considerar las banderas de condición
 	cmp eax, 0000000000000000B ; st0 > st1
 	je cfa
 	jmp checkret
-
 cfa:call eatFruit
 checkret:ret
 
@@ -1177,19 +1192,16 @@ loser:
 	call setup	
 	call palabra
 ret
-
 setup: 
-	MOV AH, 00H 
-	MOV AL, 03H 
-	INT 10H
-
+	mov AH, 00H 
+	mov AL, 03H 
+	int 10H
 	mov bh, 01h
 	mov dh, 012d
 	mov dl, 020d
 	mov ah, 02h
 	int 10h
 ret
-
 palabra:
 	call spacechar2
 	call Lchar
@@ -1212,91 +1224,178 @@ palabra:
 	call Schar
 	call Echar
 	call Rchar
-	
 ret
-
 spacechar:
 	mov al, " " 
 	call mostrar 
 ret
-
 spacechar2:
-	MOV AL, " " 
-	CALL mostrar2 
+	mov AL, " " 
+	call mostrar2 
 ret
-
 Lchar:
-	MOV AL, "L" 
-	CALL mostrar 
+	mov AL, "L" 
+	call mostrar 
 ret
-
 Ochar:
-	MOV AL, "O" 
-	CALL mostrar
+	mov AL, "O" 
+	call mostrar
 ret 
-
 Schar:
-	MOV AL, "S" 
-	CALL mostrar
+	mov AL, "S" 
+	call mostrar
 ret 
-
 Echar:
-	MOV AL, "E" 
-	CALL mostrar
+	mov AL, "E" 
+	call mostrar
 ret 
-
 Rchar:
-	MOV AL, "R" 
-	CALL mostrar
+	mov AL, "R" 
+	call mostrar
 ret 
-
 Cchar:
-	MOV AL, "C" 
-	CALL mostrar 
+	mov AL, "C" 
+	call mostrar 
 ret
-
 Uchar:
-	MOV AL, "U" 
-	CALL mostrar
+	mov AL, "U" 
+	call mostrar
 ret 
-
 Mchar:
-	MOV AL, "M" 
-	CALL mostrar
+	mov AL, "M" 
+	call mostrar
 ret 
-
 Achar:
-	MOV AL, "A" 
-	CALL mostrar
+	mov AL, "A" 
+	call mostrar
 ret 
-
-
 mostrar: 
-
 	mov ah, 02h
 	inc dl
 	int 10h
-
-	MOV AH, 09H 
-	MOV BL, 0D1H 
-	MOV BH, 00H
-	MOV CX, 01H 
-	INT 10H 
-
-	
+	mov AH, 09H 
+	mov BL, 0D1H 
+	mov BH, 00H
+	mov CX, 01H 
+	int 10H 
 ret 
-
 mostrar2: 
-
 	mov ah, 02h
 	inc dl
 	int 10h
-
-	MOV AH, 09H 
-	MOV BL, 00H 
-	MOV BH, 00H
-	MOV CX, 01H 
+	mov AH, 09H 
+	mov BL, 00H 
+	mov BH, 00H
+	mov CX, 01H 
+	int 10H 
+ret 
+win:
+	call setup2	
+	call palabra2
+ret
+setup2: 
+	mov AH, 00H 
+	mov AL, 03H 
+	INT 10H
+	mov bh, 01h
+	mov dh, 012d
+	mov dl, 020d
+	mov ah, 02h
+	int 10h
+ret
+palabra2:
+	call spacechar22
+	call Wchar
+	call Ichar
+	call Nchar
+	call Nchar
+	call Echar2
+	call Rchar2
+	call spacechar21
+	call Wchar
+	call Ichar
+	call Nchar
+	call Nchar
+	call Echar2
+	call Rchar2
+	call spacechar21
+	call Cchar2
+	call Hchar
+	call Ichar
+	call Cchar2
+	call Kchar
+	call Echar2
+	call Nchar
+	call spacechar21
+	call Dchar
+	call Ichar
+	call Nchar
+	call Nchar
+	call Echar2
+	call Rchar2
+	call spacechar21
+ret
+spacechar21:
+	mov AL, " " 
+	CALL mostrar3 
+ret
+spacechar22:
+	mov AL, " " 
+	CALL mostrar4 
+ret
+Wchar:
+	mov AL, "W" 
+	CALL mostrar3 
+ret
+Ichar:
+	mov AL, "I" 
+	CALL mostrar3
+ret 
+Nchar:
+	mov AL, "N" 
+	CALL mostrar3
+ret 
+Echar2:
+	mov AL, "E" 
+	CALL mostrar3
+ret 
+Rchar2:
+	mov AL, "R" 
+	CALL mostrar3
+ret 
+Cchar2:
+	mov AL, "C" 
+	CALL mostrar3 
+ret
+Hchar:
+	mov AL, "H" 
+	CALL mostrar3
+ret 
+Kchar:
+	mov AL, "K" 
+	CALL mostrar3
+ret 
+Dchar:
+	mov AL, "D" 
+	CALL mostrar3
+ret 
+mostrar3: 
+	mov ah, 02h
+	inc dl
+	int 10h
+	mov AH, 09H 
+	mov BL, 0D1H 
+	mov BH, 00H
+	mov CX, 01H 
 	INT 10H 
-
-	
-RET 
+ret 
+mostrar4: 
+	mov ah, 02h
+	inc dl
+	int 10h
+	mov AH, 09H 
+	mov BL, 00H 
+	mov BH, 00H
+	mov CX, 01H 
+	INT 10H 
+ret
