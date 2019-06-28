@@ -280,53 +280,53 @@ moveyourbody:
 myret:ret
 
 movimientoautomatico:
-	call getactualposindx
+	call getactualposinsi
 	call sleep_half_s
-cma1:cmp dx, 1
+cma1:cmp si, 1
 	jne cma2
 	call UpA
-cma2:cmp dx, 2
+cma2:cmp si, 2
 	jne cma3
 	call DownA
-cma3:cmp dx, 3
+cma3:cmp si, 3
 	jne cma4
 	call LeftA
-cma4:cmp dx, 4
+cma4:cmp si, 4
 	jne maret
 	call RightA
 maret:ret
 
-getactualposindx:
+getactualposinsi:
 	cmp byte [actualpos], 1
 	jne gma1
-	mov dx, [pheadori]
+	mov si, [pheadori]
 gma1:cmp byte [actualpos], 2
 	jne gma2
-	mov dx, [p2ori]
+	mov si, [p2ori]
 gma2:cmp byte [actualpos], 3
 	jne gma3
-	mov dx, [p3ori]
+	mov si, [p3ori]
 gma3:cmp byte [actualpos], 4
 	jne gma4
-	mov dx, [p4ori]
+	mov si, [p4ori]
 gma4:cmp byte [actualpos], 5
 	jne gma5
-	mov dx, [p5ori]
+	mov si, [p5ori]
 gma5:cmp byte [actualpos], 6
 	jne gma6
-	mov dx, [p6ori]
+	mov si, [p6ori]
 gma6:cmp byte [actualpos], 7
 	jne gma7
-	mov dx, [p7ori]
+	mov si, [p7ori]
 gma7:cmp byte [actualpos], 8
 	jne gma8
-	mov dx, [p8ori]
+	mov si, [p8ori]
 gma8:cmp byte [actualpos], 9
 	jne gma9
-	mov dx, [p9ori]
+	mov si, [p9ori]
 gma9:cmp byte [actualpos], 10
 	jne gma10
-	mov dx, [p10ori]
+	mov si, [p10ori]
 gma10:ret
 
 UpA: ; Orientación 1
